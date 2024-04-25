@@ -31,9 +31,9 @@ def get_df(filename):
         skipinitialspace=True,
     )
     df = strip_df(df)
-    df = df.rename(columns=rename_cols)
+    #df = df.rename(columns=rename_cols)
     df = df.drop(columns=drop_cols)
     # replace words with values (laker scale)
-    df = df.replace(replacer)
+    #df = df.replace(replacer)
     df = add_completion_time(df)
     return df
