@@ -12,6 +12,5 @@ To run the analyis go to the dacstore directory and run `main.py`, e.g.
 
 ```bash
 cd dacstore
-,
 python main.py
 ```
