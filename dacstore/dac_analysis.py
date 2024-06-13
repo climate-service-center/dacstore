@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-from dac_config import replacer, drop_cols, rename_cols
+from dac_config import replacer, drop_cols, rename_cols, cleaning_dict
 
 
 def strip_df(df):
@@ -20,7 +20,24 @@ def add_completion_time(df):
     return df.drop(columns=["Started on", "Last updated on"])
 
 
-def get_df(filename):
+def value_counts(df, normalize=True):
+    """Count values in colums"""
+    counts = {}
+    for c in df:
+        counts[c] = df[c].value_counts(normalize=normalize).to_dict()
+    return counts
+
+
+def to_results(counts, categories, labels=None, fact=100):
+    results = {}
+    for question, data in counts.items():
+        if labels:
+            label = labels.get(question) or question
+        results[label] = [data[k] * 100 for k in categories]
+    return results
+
+
+def get_df(filename, drop=True):
     """open csv file and do some cleaning"""
     df = pd.read_csv(
         filename,
@@ -31,9 +48,11 @@ def get_df(filename):
         skipinitialspace=True,
     )
     df = strip_df(df)
-    #df = df.rename(columns=rename_cols)
-    df = df.drop(columns=drop_cols)
+    # df = df.rename(columns=rename_cols)
+    df = df.replace(cleaning_dict)
+    if drop is True:
+        df = df.drop(columns=drop_cols)
     # replace words with values (laker scale)
-    #df = df.replace(replacer)
+    # df = df.replace(replacer)
     df = add_completion_time(df)
     return df
