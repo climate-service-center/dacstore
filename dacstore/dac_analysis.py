@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-from dac_config import replacer, drop_cols, rename_cols, cleaning_dict
+from dac_config import replacer, drop_cols, rename_cols, cleaning_dict, translation_columns, translation_answers
 
 
 def strip_df(df):
@@ -31,13 +31,14 @@ def value_counts(df, normalize=True):
 def to_results(counts, categories, labels=None, fact=100):
     results = {}
     for question, data in counts.items():
+        label = question
         if labels:
             label = labels.get(question) or question
         results[label] = [data[k] * 100 for k in categories]
     return results
 
 
-def get_df(filename, drop=True):
+def get_df(filename, drop=True, translate=True):
     """open csv file and do some cleaning"""
     df = pd.read_csv(
         filename,
@@ -50,9 +51,13 @@ def get_df(filename, drop=True):
     df = strip_df(df)
     # df = df.rename(columns=rename_cols)
     df = df.replace(cleaning_dict)
+    if translate:
+        df = df.rename(columns=translation_columns)
+        df = df.replace(translation_answers)
     if drop is True:
         df = df.drop(columns=drop_cols)
     # replace words with values (laker scale)
     # df = df.replace(replacer)
     df = add_completion_time(df)
+    df = strip_df(df)
     return df

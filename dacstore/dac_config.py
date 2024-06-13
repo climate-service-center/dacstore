@@ -1,29 +1,6 @@
 import numpy as np
 
 
-cleaning_dict = {"Stimme ich zu": "Stimme zu"}
-
-
-scale = [
-    "Stimme voll und ganz zu",
-    "Stimme zu",
-    "Stimme weder zu noch lehne ich ab",
-    "Stimme nicht zu",
-    "Stimme überhaupt nicht zu",
-    "Weiß nicht",
-]
-
-
-categories = {
-    "knowledge": [
-        "Nie gehört",
-        "Nur gehört / Keine Kenntnisse",
-        "Grundverständnis",
-        "Gute Kenntnisse",
-        "Sehr gute Kenntnisse",
-    ]
-}
-
 
 groups = {
     "Climate Change": {
@@ -126,7 +103,7 @@ rename_cols = {
     "Wissenschaft": "Trust 3",
     "Vereinte Nationen (UNO)": "Trust 4",
     "Europäische Union": "Trust 5",
-    "Nichtregierungs- und  Umweltschutzorganisationen": "Trust 6",
+    "Nichtregierungs- und Umweltschutzorganisationen": "Trust 6",
     "Medien": "Trust 7",
     "Direct Air Capture (DAC).1": "Final DAC Support",
     # One more needed for the final DAC support currently an error
@@ -230,7 +207,7 @@ drop_cols = [
 ]
 
 
-translation_questions = {
+translation_columns = {
     "Geschlecht": "Gender",
     "Altersgruppe": "Age",
     "Höchster Bildungsabschluss": "Education",
@@ -275,11 +252,12 @@ translation_questions = {
     "Wissenschaft": "Science",
     "Vereinte Nationen (UNO)": "United Nations (UN)",
     "Europäische Union": "European Union",
-    "Nichtregierungs- und  Umweltschutzorganisationen": "Environmental Protection Organizations and NGOs",
+    "Nichtregierungs- und Umweltschutzorganisationen": "Environmental Protection Organizations and NGOs",
     "Medien": "Media",
     "Direct Air Capture (DAC).1": "Final DAC Support",
     "CO2-Speicherung.1": "Final Storage Support",
     "Ihre E-Mail Adresse": "Engagement",
+    "Inwiefern vertrauen Sie darauf, dass diese Gruppen im Interesse der Gesellschaft handeln werden?":"How much do you trust in these groups to act in the interest of society?"
 }
 
 
@@ -290,7 +268,8 @@ translation_answers = {
     "Etwas": "Somewhat",
     "Voll und ganz": "Absolutely",
     "Nein": "No",
-    "Nur gehört / Keine Kenntnisse": "I heard about it but know nothing about it",
+    "Nie gehört": "Never heard",
+    "Nur gehört / Keine Kenntnisse": "I heard about / no knowledge",
     "Grundverständnis": "Basic understanding",
     "Gute Kenntnisse": "Good knowledge",
     "Sehr gute Kenntnisse": "Very good knowledge",
@@ -357,3 +336,69 @@ translation_answers = {
     "Mäßiges Vertrauen": "Moderate trust",
     "Starkes Vertrauen": "Strongly trust",
 }
+
+
+cleaning_dict = {"Stimme ich zu": "Stimme zu"}
+
+
+scale = [
+    "Stimme voll und ganz zu",
+    "Stimme zu",
+    "Stimme weder zu noch lehne ich ab",
+    "Stimme nicht zu",
+    "Stimme überhaupt nicht zu",
+    "Weiß nicht",
+]
+
+knowledge_de = [
+        "Nie gehört",
+        "Nur gehört / Keine Kenntnisse",
+        "Grundverständnis",
+        "Gute Kenntnisse",
+        "Sehr gute Kenntnisse",
+    ]
+
+trust_en = [
+ 'No trust at all',
+ 'Low trust',
+ 'Neutral',
+ 'Moderate trust',
+ 'Strongly trust',
+ 'I dont know',
+]
+
+support = [
+    'Not at all',
+    'Rather not',
+    'Neutral',
+    'Somewhat', 
+    'Absolutely', 
+]
+
+agreement = [
+    'Don’t agree at all',
+    'Don’t agree',
+    'Neutral',
+    'Agree',
+    'Totally agree',
+    'I dont know',    
+]
+
+categories = {
+    "knowledge_de": knowledge_de,
+    "knowledge_en": [translation_answers[de] for de in knowledge_de],
+    "trust_en": trust_en,
+    "support_en": support,
+    "agreement_en": agreement,
+}
+
+red = [0.89888504, 0.30549789, 0.20676663, 1.        ]
+orange = [0.98869666, 0.65736255, 0.36885813, 1.        ]
+yellow = [0.99730873, 0.91657055, 0.60907343, 1.        ]
+yellowgreen = [0.89773164, 0.95693964, 0.60907343, 1.        ]
+lightgreen = [0.62637447, 0.8402153 , 0.412995  , 1.        ]
+green = [0.24805844, 0.66720492, 0.3502499 , 1.        ]
+
+agreement_cmap = [red, orange, yellow, lightgreen, green, "gray"]
+
+
