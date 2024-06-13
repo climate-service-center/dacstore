@@ -384,12 +384,28 @@ agreement = [
     'I dont know',    
 ]
 
+gender = [
+    "Male",
+    "Diverse",
+    "Female",
+]
+
+age = [
+  '30 - 39',
+  '20 - 29',
+  '40 - 49',
+  '50 - 59',
+  '60+'
+]
+
 categories = {
     "knowledge_de": knowledge_de,
     "knowledge_en": [translation_answers[de] for de in knowledge_de],
     "trust_en": trust_en,
     "support_en": support,
     "agreement_en": agreement,
+    "gender_en": gender,
+    "age": age,
 }
 
 red = [0.89888504, 0.30549789, 0.20676663, 1.        ]
