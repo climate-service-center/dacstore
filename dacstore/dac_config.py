@@ -224,7 +224,7 @@ translation_columns = {
     "Direct Air Capture (DAC)": "Initial DAC Support",
     "CO2-Speicherung": "Initial Storage Support",
     "Welche Hauptemotion empfinden Sie gegenüber DAC-Technologien?": " What main emotion do you feel towards DAC technologies?",
-    "DAC ist eine ausgereifte saubere Technologie.": "DAC is a mature clean technology ",
+    "DAC ist eine ausgereifte saubere Technologie.": "DAC is a mature clean technology",
     "Menschen sollten die Natur nicht auf diese Weise manipulieren.": "Humans should not be tampering with nature in this way",
     "Ich denke nicht, dass das Einbringen von CO2 in den Boden eine gute Idee ist.": "I don’t think that injecting CO2 into the ground is a good idea",
     "Versuche, das Klimasystem durch die Anwendung von DAC zu beeinflussen, zeugen von menschlichem Hochmut.": "Trying to influence the climate system by using DAC reflects human arrogance",

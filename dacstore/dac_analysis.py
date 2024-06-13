@@ -34,7 +34,7 @@ def to_results(counts, categories, labels=None, fact=100):
         label = question
         if labels:
             label = labels.get(question) or question
-        results[label] = [data[k] * 100 for k in categories]
+        results[label] = [data.get(k,0.) * 100 for k in categories]
     return results
 
 
