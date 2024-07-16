@@ -1,5 +1,5 @@
 # Author: Lars Buntemeyer and Rodrigo Valencia (a little bit).
-# Insitute: Climate Service Center Germany (GERICS)
+# Insitute: Climate Service Center Germany (GERICS).
 
 import pandas as pd
 
