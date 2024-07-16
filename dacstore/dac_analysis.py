@@ -1,3 +1,5 @@
+# Author: Lars Buntemeyer and Rodrigo Valencia (a little bit)
+
 import pandas as pd
 
 
