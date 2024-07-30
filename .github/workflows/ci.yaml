@@ -34,7 +34,9 @@ jobs:
       run: |
         pip install -e . --no-deps
 
-    - name: Update plots
+    - name: Check results
+      env:
+        SURVEY_HERO_USER: ${{ secrets.SURVEY_HERO_USER }}
+        SURVEY_HERO_PASSWORD: ${{ secrets.SURVEY_HERO_PASSWORD }}
       run: |
-        whoami
-        python -V
+        python main.py
