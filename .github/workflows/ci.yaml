@@ -36,7 +36,7 @@ jobs:
 
     - name: Check results
       env:
-        SURVERY_HERO_USER: ${{ secrets.SURVEY_HERO_USER }}
-        SURVERY_HERO_PASSWORD: ${{ secrets.SURVEY_HERO_PASSWORD }}
+        SURVEY_HERO_USER: ${{ secrets.SURVEY_HERO_USER }}
+        SURVEY_HERO_PASSWORD: ${{ secrets.SURVEY_HERO_PASSWORD }}
       run: |
         python main.py
