@@ -30,6 +30,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Install dacstore scripts
+      run: |
+        pip install -e . --no-deps
+
     - name: Update plots
       run: |
         whoami
