@@ -1,7 +1,6 @@
 import numpy as np
 
 
-
 groups = {
     "Climate Change": {
         "Der Klimawandel findet tatsächlich statt.",
@@ -257,7 +256,7 @@ translation_columns = {
     "Direct Air Capture (DAC).1": "Final DAC Support",
     "CO2-Speicherung.1": "Final Storage Support",
     "Ihre E-Mail Adresse": "Engagement",
-    "Inwiefern vertrauen Sie darauf, dass diese Gruppen im Interesse der Gesellschaft handeln werden?":"How much do you trust in these groups to act in the interest of society?"
+    "Inwiefern vertrauen Sie darauf, dass diese Gruppen im Interesse der Gesellschaft handeln werden?": "How much do you trust in these groups to act in the interest of society?",
 }
 
 
@@ -351,37 +350,37 @@ scale = [
 ]
 
 knowledge_de = [
-        "Nie gehört",
-        "Nur gehört / Keine Kenntnisse",
-        "Grundverständnis",
-        "Gute Kenntnisse",
-        "Sehr gute Kenntnisse",
-    ]
+    "Nie gehört",
+    "Nur gehört / Keine Kenntnisse",
+    "Grundverständnis",
+    "Gute Kenntnisse",
+    "Sehr gute Kenntnisse",
+]
 
 trust_en = [
- 'No trust at all',
- 'Low trust',
- 'Neutral',
- 'Moderate trust',
- 'Strongly trust',
- 'I dont know',
+    "No trust at all",
+    "Low trust",
+    "Neutral",
+    "Moderate trust",
+    "Strongly trust",
+    "I dont know",
 ]
 
 support = [
-    'Not at all',
-    'Rather not',
-    'Neutral',
-    'Somewhat', 
-    'Absolutely', 
+    "Not at all",
+    "Rather not",
+    "Neutral",
+    "Somewhat",
+    "Absolutely",
 ]
 
 agreement = [
-    'Don’t agree at all',
-    'Don’t agree',
-    'Neutral',
-    'Agree',
-    'Totally agree',
-    'I dont know',    
+    "Don’t agree at all",
+    "Don’t agree",
+    "Neutral",
+    "Agree",
+    "Totally agree",
+    "I dont know",
 ]
 
 gender = [
@@ -390,13 +389,7 @@ gender = [
     "Female",
 ]
 
-age = [
-  '30 - 39',
-  '20 - 29',
-  '40 - 49',
-  '50 - 59',
-  '60+'
-]
+age = ["30 - 39", "20 - 29", "40 - 49", "50 - 59", "60+"]
 
 categories = {
     "knowledge_de": knowledge_de,
@@ -408,13 +401,12 @@ categories = {
     "age": age,
 }
 
-red = [0.89888504, 0.30549789, 0.20676663, 1.        ]
-orange = [0.98869666, 0.65736255, 0.36885813, 1.        ]
-yellow = [0.99730873, 0.91657055, 0.60907343, 1.        ]
-yellowgreen = [0.89773164, 0.95693964, 0.60907343, 1.        ]
-lightgreen = [0.62637447, 0.8402153 , 0.412995  , 1.        ]
-green = [0.24805844, 0.66720492, 0.3502499 , 1.        ]
+red = [0.89888504, 0.30549789, 0.20676663, 1.0]
+orange = [0.98869666, 0.65736255, 0.36885813, 1.0]
+yellow = [0.99730873, 0.91657055, 0.60907343, 1.0]
+yellowgreen = [0.89773164, 0.95693964, 0.60907343, 1.0]
+lightgreen = [0.62637447, 0.8402153, 0.412995, 1.0]
+green = [0.24805844, 0.66720492, 0.3502499, 1.0]
 
 agreement_cmap = [red, orange, yellow, lightgreen, green, "gray"]
-
-
+colors = [red, orange, yellow, lightgreen, green]

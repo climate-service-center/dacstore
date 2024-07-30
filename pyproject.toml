@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dacstore"
+version = "0.1.0"
+#dynamic = ["dependencies", "optional-dependencies"]
+dynamic = ["dependencies"]
+
+[tool.setuptools]
+packages = ["dacstore"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+# optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}

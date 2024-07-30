@@ -1,3 +1,4 @@
+# ruff: noqa
 # -*- coding: utf-8 -*-
 """
 Created on Tue Apr  9 16:22:44 2024

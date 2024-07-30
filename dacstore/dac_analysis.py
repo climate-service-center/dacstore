@@ -4,7 +4,7 @@
 import pandas as pd
 
 
-from dac_config import replacer, drop_cols, rename_cols, cleaning_dict, translation_columns, translation_answers
+from .config import drop_cols, cleaning_dict, translation_columns, translation_answers
 
 
 def strip_df(df):
@@ -37,7 +37,7 @@ def to_results(counts, categories, labels=None, fact=100):
         label = question
         if labels:
             label = labels.get(question) or question
-        results[label] = [data.get(k,0.) * 100 for k in categories]
+        results[label] = [data.get(k, 0.0) * 100 for k in categories]
     return results
 
 
