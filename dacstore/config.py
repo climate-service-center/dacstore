@@ -416,5 +416,5 @@ lightgreen = [0.62637447, 0.8402153 , 0.412995  , 1.        ]
 green = [0.24805844, 0.66720492, 0.3502499 , 1.        ]
 
 agreement_cmap = [red, orange, yellow, lightgreen, green, "gray"]
-
+colors = [red, orange, yellow, lightgreen, green]
 

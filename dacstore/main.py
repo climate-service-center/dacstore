@@ -1,6 +1,6 @@
-from dac_analysis import get_df
+from dacstore.dac_analysis import get_df
 
-data = "data.csv"
+data = "data/data.csv"
 
 
 def main(filename):

@@ -4,7 +4,7 @@
 import pandas as pd
 
 
-from dac_config import replacer, drop_cols, rename_cols, cleaning_dict, translation_columns, translation_answers
+from .config import replacer, drop_cols, rename_cols, cleaning_dict, translation_columns, translation_answers
 
 
 def strip_df(df):
