@@ -1,28 +1,22 @@
-
-from os import path as op
 import numpy as np
 import matplotlib.pyplot as plt
 
-from .config import (
-    agreement_cmap,
-    categories,
-    green,
-    groups,
-    lightgreen,
-    orange,
-    red,
-    scale,
-    yellow,
-    yellowgreen,
-)
 
 try:
-    import seaborn
+    import seaborn  # noqa
 except ImportError:
     pass
 
 
-def plot(results, category_names, colors=None, limit=5.0, height=0.8, figsize=(25,5),fname=None):
+def plot(
+    results,
+    category_names,
+    colors=None,
+    limit=5.0,
+    height=0.8,
+    figsize=(25, 5),
+    fname=None,
+):
     """
     Parameters
     ----------

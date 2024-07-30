@@ -5,6 +5,7 @@ data = "data/data.csv"
 
 def main(filename):
     df = get_df(filename)
+    print(df)
     # do analysis here
 
 
