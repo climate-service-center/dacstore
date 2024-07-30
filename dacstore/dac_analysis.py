@@ -64,3 +64,11 @@ def get_df(filename, drop=True, translate=True):
     df = add_completion_time(df)
     df = strip_df(df)
     return df
+
+
+def valid_row(row):
+    pass
+
+
+def valids(df):
+    "add a colum with validation check"
