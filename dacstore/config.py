@@ -201,8 +201,9 @@ drop_cols = [
     "Wenn die folgenden Technologien in Deutschland eingeführt wären, wie groß sollte der Mindestabstand zur nächsten Siedlung sein?",
     "Mit welchen CO2-Transportwege wären Sie einverstanden?",
     "Inwiefern stimmen Sie den folgenden Aussagen zu?",
-    "Inwiefern vertrauen Sie darauf, dass diese Gruppen im Interesse der Gesellschaft handeln werden?",
+    # "Inwiefern vertrauen Sie darauf, dass diese Gruppen im Interesse der Gesellschaft handeln werden?",
     "Unterstützen Sie die Einführung der folgenden Technologien?.1",
+    # "Unterstützen Sie die Einführung der folgenden Technologien?.1"
 ]
 
 
