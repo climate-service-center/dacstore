@@ -2,7 +2,6 @@ import pandas as pd
 import requests
 from io import BytesIO
 
-
 survey_id = 1837044
 api_url = f"https://api.surveyhero.com/v1/surveys/{survey_id}/responses"
 
@@ -22,12 +21,3 @@ def get_data(source=None, user=None, password=None, postprocess=True):
     if postprocess is True:
         df["completion_time"] = df["Last updated on"] - df["Started on"]
     return df
-
-
-def valid_row(row):
-    pass
-
-
-def valids(df):
-    "add a colum with validation check"
-    pass
