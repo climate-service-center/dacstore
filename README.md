@@ -1,14 +1,13 @@
-# Acceptance analysis of Direct Air Capture and Storage
 
-<img src="https://raw.githubusercontent.com/climate-service-center/dacstore/main/docs/DACStorE_Logo_RGB_digital_farbig.png" width="200" align="left">
+<img src="https://raw.githubusercontent.com/climate-service-center/dacstore/main/docs/DACStorE_Logo_RGB_digital_farbig.png?token=GHSAT0AAAAAACU77OL3BSSV5EUX2OJQCCTUZVNAYZA" width="200" align="right">
+
+# Acceptance analysis of Direct Air Capture and Storage
 
 Acceptance analysis of Direct Air Capture and Storage in the [DACStorE project](https://www.dacstore-project.com).
 
-This project utilizes the [SurveyHero API](https://developer.surveyhero.com/api/) to update and automate the data analysis.
-
 ## Installation
 
-Clone the repository with the following command in the terminal:
+This project utilizes the [SurveyHero API](https://developer.surveyhero.com/api/) to update and automate the data analysis. Clone the repository with the following command in the terminal:
 
 ```bash
 https://github.com/climate-service-center/dacstore.git
