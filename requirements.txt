@@ -4,3 +4,4 @@ numpy
 requests
 jinja2
 openpyxl
+xlsxwriter
