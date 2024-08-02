@@ -151,7 +151,10 @@ def valid(df):
     return df.apply(check_row, axis=1)
 
 
-def highlight_invalid(s):
+def highlight_invalid(row):
     """Highlight cells"""
-    is_above_threshold = s != "valid"
-    return ["background-color: yellow" if v else "" for v in is_above_threshold]
+    invalid = row.valid != "valid"
+    # print(invalid)
+    return ["background-color: red" if invalid else "background-color: green"] * len(
+        row
+    )
