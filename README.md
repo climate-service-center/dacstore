@@ -1,5 +1,5 @@
 
-<img src="https://raw.githubusercontent.com/climate-service-center/dacstore/main/docs/DACStorE_Logo_RGB_digital_farbig.png?token=GHSAT0AAAAAACU77OL3BSSV5EUX2OJQCCTUZVNAYZA" width="200" align="right">
+<img src="https://www.dacstore-project.com/@@project-logo/DACStorE_Logo_RGB_digital_farbig.png" width="200" align="right">
 
 # Acceptance analysis of Direct Air Capture and Storage
 
