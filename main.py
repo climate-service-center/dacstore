@@ -4,7 +4,6 @@ from dacstore.validation import valid, highlight_invalid
 
 
 report_cols = [
-    "ID",
     "Status",
     "completion_time",
     "Bei dieser Frage ignorieren Sie bitte die folgenden Optionen und wählen Sie 'Stimme nicht zu'.",
