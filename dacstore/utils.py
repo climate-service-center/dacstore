@@ -41,9 +41,7 @@ def to_results(counts, categories, labels=None, fact=100):
     return results
 
 
-def get_data(
-    source=None, user=None, password=None, postprocess=True, translate=True, drop=True
-):
+def get_data(source=None, user=None, password=None, translate=True, drop=True):
     """read csv from file or surveyhero api"""
     if source is None:
         # get data from surveyhero api
@@ -79,8 +77,7 @@ def get_data(
     if drop is True:
         df = df.drop(columns=drop_cols)
 
-    if postprocess is True:
-        df["completion_time"] = df["Last updated on"] - df["Started on"]
+    df["completion_time"] = df["Last updated on"] - df["Started on"]
 
     df = strip_df(df)
 

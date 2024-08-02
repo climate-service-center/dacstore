@@ -22,6 +22,7 @@ def check_valid(filename=None, user=None, password=None):
     df["valid"] = valid(df)
 
     valid_fraction = df.valid.value_counts().valid / len(df)
+    print(f"responses: {len(df)}")
     print(f"valid: {valid_fraction}")
     print(df.valid.value_counts(normalize=True))
 
