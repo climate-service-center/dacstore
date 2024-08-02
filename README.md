@@ -10,7 +10,7 @@ Acceptance analysis of Direct Air Capture and Storage in the [DACStorE project](
 This project utilizes the [SurveyHero API](https://developer.surveyhero.com/api/) to update and automate the data analysis. Clone the repository with the following command in the terminal:
 
 ```bash
-https://github.com/climate-service-center/dacstore.git
+git clone https://github.com/climate-service-center/dacstore.git
 ```
 
 To run the analyis go to the dacstore directory and run `main.py`, e.g.
