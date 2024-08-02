@@ -1,4 +1,4 @@
-# DACStoreE
+# Acceptance analysis of Direct Air Capture and Storage
 
 Acceptance analysis of Direct Air Capture and Storage in the [DACStorE project](https://www.dacstore-project.com).
 
