@@ -1,5 +1,5 @@
 import os
-from dacstore.utils import get_data
+from dacstore.utils import get_data, to_excel
 from dacstore.validation import valid, highlight_invalid
 
 
@@ -25,10 +25,12 @@ def check_valid(filename=None, user=None, password=None):
     print(f"valid: {valid_fraction}")
     print(df.valid.value_counts(normalize=True))
 
-    df.to_csv("data.csv")
-    df[report_cols].style.apply(highlight_invalid, axis=1).to_excel(
-        "valid.xlsx", index=True
+    xlsx = (
+        df[report_cols]
+        .style.apply(highlight_invalid, axis=1)
+        .astype({"completion_time": str})
     )
+    to_excel(xlsx, "valid.xlsx")
 
 
 if __name__ == "__main__":
