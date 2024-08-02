@@ -17,9 +17,14 @@ def check_valid(filename=None, user=None, password=None):
         user = os.environ.get("SURVEY_HERO_USER")
     if password is None:
         password = os.environ.get("SURVEY_HERO_PASSWORD")
+
     df = get_data(filename, user, password, translate=False, drop=False)
     df["valid"] = valid(df)
+
+    valid_fraction = df.valid.value_counts().valid / len(df)
+    print(f"valid: {valid_fraction}")
     print(df.valid.value_counts(normalize=True))
+
     df.to_csv("data.csv")
     df[report_cols].style.apply(highlight_invalid, axis=1).to_excel(
         "valid.xlsx", index=True

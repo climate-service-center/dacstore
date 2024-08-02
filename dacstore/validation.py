@@ -155,6 +155,4 @@ def highlight_invalid(row):
     """Highlight cells"""
     invalid = row.valid != "valid"
     # print(invalid)
-    return ["background-color: red" if invalid else "background-color: green"] * len(
-        row
-    )
+    return ["background-color: red" if invalid else ""] * len(row)
