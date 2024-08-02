@@ -126,9 +126,7 @@ def check_row(row):
 
     if row.completion_time < completion_time_limit:
         status[COMPLETION_TIME_TOO_LONG]["status"] = True
-        status[COMPLETION_TIME_TOO_LONG][
-            "description"
-        ] = f"completion time too short: {row.completion_time.seconds} seconds"
+        status[COMPLETION_TIME_TOO_LONG]["description"] = "completion time too short"
 
     if row.Status != "Completed":
         status[NOT_COMPLETED]["status"] = True
@@ -141,7 +139,7 @@ def check_row(row):
 
     if score > 0.5:
         status[STRAIGHTLINING]["status"] = True
-        status[STRAIGHTLINING]["description"] = f"answers seem to be random: {score}"
+        status[STRAIGHTLINING]["description"] = "answers seem to be random"
 
     return create_row_status(status)
 
