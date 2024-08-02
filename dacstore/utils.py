@@ -89,20 +89,21 @@ def get_data(
 
 def to_excel(df, filename):
     """Auto adjust column width and save to Excel file"""
-    # create a pandas.ExcelWriter object
+    # Create a pandas.ExcelWriter object
     writer = pd.ExcelWriter(filename, engine="xlsxwriter")
 
-    # write the data frame to Excel
-    df.to_excel(writer, index=False)
+    # Write the DataFrame to Excel
+    df.to_excel(writer, index=False, sheet_name="Sheet1")
 
-    # get the XlsxWriter workbook and worksheet objects
-    # workbook = writer.book
+    # Get the XlsxWriter workbook and worksheet objectsk
     worksheet = writer.sheets["Sheet1"]
 
-    # adjust the column widths based on the content
+    # Adjust the column widths based on the content
     for i, col in enumerate(df.columns):
-        width = max(df[col].apply(lambda x: len(str(x))).max(), len(col))
-        worksheet.set_column(i, i, width)
+        # Calculate the maximum width for the column
+        max_width = max(df[col].astype(str).map(len).max(), len(col))
+        # Set the column width
+        worksheet.set_column(i, i, max_width)
 
-    # save the Excel file
+    # Save the Excel file
     writer.close()

@@ -25,12 +25,8 @@ def check_valid(filename=None, user=None, password=None):
     print(f"valid: {valid_fraction}")
     print(df.valid.value_counts(normalize=True))
 
-    xlsx = (
-        df[report_cols]
-        .astype({"completion_time": str})
-        .style.apply(highlight_invalid, axis=1)
-    )
-    to_excel(xlsx, "valid.xlsx")
+    df[report_cols].style.apply(highlight_invalid, axis=1)
+    to_excel(df[report_cols].astype({"completion_time": str}), "valid.xlsx")
 
 
 if __name__ == "__main__":
