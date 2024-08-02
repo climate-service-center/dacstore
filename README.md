@@ -1,6 +1,10 @@
-# dacstore
+# DACStoreE
 
-Acceptance analysis of Direct Air Capture and Storage (DACStorE)
+Acceptance analysis of Direct Air Capture and Storage in the [DACStorE project](https://www.dacstore-project.com).
+
+This project utilizes the [SurveyHero API](https://developer.surveyhero.com/api/) to update and automate the data analysis.
+
+## Installation
 
 Clone the repository with the following command in the terminal:
 
