@@ -40,3 +40,10 @@ jobs:
         SURVEY_HERO_PASSWORD: ${{ secrets.SURVEY_HERO_PASSWORD }}
       run: |
         python main.py
+
+    - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Results for ${{ runner.os }}-${{ matrix.python-version }}
+          path: valid.xlsx
