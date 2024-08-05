@@ -8,6 +8,17 @@ survey_id = 1837044
 api_url = f"https://api.surveyhero.com/v1/surveys/{survey_id}/responses"
 
 
+report_cols = [
+    "Status",
+    "Geschlecht",
+    "Altersgruppe",
+    "Höchster Bildungsabschluss",
+    "Beruf",
+    "completion_time",
+    "Bei dieser Frage ignorieren Sie bitte die folgenden Optionen und wählen Sie 'Stimme nicht zu'.",
+    "valid",
+]
+
 # a function that translates ascii regex to python regex
 
 
@@ -84,13 +95,16 @@ def get_data(source=None, user=None, password=None, translate=True, drop=True):
     return df
 
 
-def to_excel(df, filename):
+def report_to_excel(df, filename):
     """Auto adjust column width and save to Excel file"""
     # Create a pandas.ExcelWriter object
-    writer = pd.ExcelWriter(filename, engine="xlsxwriter")
+    # if engine == "openpyxl":
+    from openpyxl.utils import get_column_letter
+    from openpyxl.styles import PatternFill
 
-    # Write the DataFrame to Excel
-    df.to_excel(writer, index=False, sheet_name="Sheet1")
+    writer = pd.ExcelWriter(filename, engine="openpyxl")
+    df = df[report_cols]
+    df.to_excel(writer, index=True, sheet_name="Sheet1")
 
     # Get the XlsxWriter workbook and worksheet objectsk
     worksheet = writer.sheets["Sheet1"]
@@ -100,7 +114,30 @@ def to_excel(df, filename):
         # Calculate the maximum width for the column
         max_width = max(df[col].astype(str).map(len).max(), len(col))
         # Set the column width
-        worksheet.set_column(i, i, max_width)
+        print(max_width)
+        # worksheet.set_column(i+1, i+1, max_width)
+        worksheet.column_dimensions[get_column_letter(i + 2)].width = max_width
 
-    # Save the Excel file
+    # writer.close()
+
+    # workbook = load_workbook(filename=filename)
+    # sheet = workbook["Sheet1"]
+    sheet = worksheet
+
+    colnames = ["valid", "Geschlecht"]
+
+    col_indices = {
+        cell.value: n
+        for n, cell in enumerate(list(sheet.rows)[0])
+        if cell.value in colnames
+    }
+
+    for row in sheet.iter_rows(min_row=1, max_row=None, min_col=None, max_col=None):
+        if row[col_indices["valid"]].value != "valid":
+            for cell in row:
+                cell.fill = PatternFill(
+                    start_color="FF001F", end_color="FF001F", fill_type="solid"
+                )
+
+    # workbook.save(filename=filename)
     writer.close()

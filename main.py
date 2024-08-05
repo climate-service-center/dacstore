@@ -1,14 +1,6 @@
 import os
-from dacstore.utils import get_data, to_excel
-from dacstore.validation import valid, highlight_invalid
-
-
-report_cols = [
-    "Status",
-    "completion_time",
-    "Bei dieser Frage ignorieren Sie bitte die folgenden Optionen und wählen Sie 'Stimme nicht zu'.",
-    "valid",
-]
+from dacstore.utils import get_data, report_to_excel
+from dacstore.validation import valid
 
 
 def check_valid(filename=None, user=None, password=None):
@@ -26,8 +18,8 @@ def check_valid(filename=None, user=None, password=None):
     print(f"valid: {valid_fraction}")
     print(df.valid.value_counts(normalize=True))
 
-    df[report_cols].style.apply(highlight_invalid, axis=1)
-    to_excel(df[report_cols].astype({"completion_time": str}), "valid.xlsx")
+    # df[report_cols].style.apply(highlight_invalid, axis=1)
+    report_to_excel(df.astype({"completion_time": str}), "valid.xlsx")
 
 
 if __name__ == "__main__":
