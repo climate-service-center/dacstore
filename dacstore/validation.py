@@ -141,7 +141,7 @@ def check_row(row):
 
     if score > SCORE_LIMIT:
         status[STRAIGHTLINING]["status"] = True
-        status[STRAIGHTLINING]["description"] = "answers seem to be random"
+        status[STRAIGHTLINING]["description"] = "straightlining"
 
     return create_row_status(status)
 

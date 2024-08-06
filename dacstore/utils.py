@@ -9,11 +9,13 @@ api_url = f"https://api.surveyhero.com/v1/surveys/{survey_id}/responses"
 
 
 report_cols = [
+    "{id}",
     "Status",
+    "Started on",
     "Geschlecht",
     "Altersgruppe",
-    "Höchster Bildungsabschluss",
-    "Beruf",
+    # "Höchster Bildungsabschluss",
+    # "Beruf",
     "completion_time",
     "Bei dieser Frage ignorieren Sie bitte die folgenden Optionen und wählen Sie 'Stimme nicht zu'.",
     "valid",
