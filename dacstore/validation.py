@@ -146,6 +146,15 @@ def check_row(row):
     return create_row_status(status)
 
 
+def gender_age(df):
+    """Return gender age groups of valid answers"""
+    return (
+        df[df.valid == "valid"]
+        .groupby("Geschlecht")
+        .Altersgruppe.value_counts(normalize=False)
+    )
+
+
 def valid(df):
     "add a colum with validation check"
     return df.apply(check_row, axis=1)

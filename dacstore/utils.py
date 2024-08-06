@@ -3,6 +3,7 @@ import requests
 from io import StringIO
 
 from .config import drop_cols, cleaning_dict, translation_columns, translation_answers
+from .validation import gender_age
 
 survey_id = 1837044
 api_url = f"https://api.surveyhero.com/v1/surveys/{survey_id}/responses"
@@ -97,44 +98,50 @@ def get_data(source=None, user=None, password=None, translate=True, drop=True):
     return df
 
 
-def report_to_excel(df, filename):
-    """Auto adjust column width and save to Excel file"""
-    # Create a pandas.ExcelWriter object
-    # if engine == "openpyxl":
+def adjust_excel_column_width(df, sheet):
     from openpyxl.utils import get_column_letter
-    from openpyxl.styles import PatternFill
-
-    df = df.astype({"completion_time": str, "{id}": str})
-    writer = pd.ExcelWriter(filename, engine="openpyxl")
-    df = df[report_cols]
-    df.to_excel(writer, index=True, sheet_name="Sheet1")
-
-    # Get the XlsxWriter workbook and worksheet objectsk
-    worksheet = writer.sheets["Sheet1"]
 
     # Adjust the column widths based on the content
     for i, col in enumerate(df.columns):
         # Calculate the maximum width for the column
         max_width = max(df[col].astype(str).map(len).max(), len(col))
         # Set the column width
-        print(max_width)
         # worksheet.set_column(i+1, i+1, max_width)
-        worksheet.column_dimensions[get_column_letter(i + 2)].width = max_width
+        sheet.column_dimensions[get_column_letter(i + 2)].width = max_width
+    return sheet
+
+
+def report_to_excel(df, filename):
+    """Auto adjust column width and save to Excel file"""
+    # Create a pandas.ExcelWriter object
+    # if engine == "openpyxl":
+
+    from openpyxl.styles import PatternFill
+
+    GENDER_AGE = "Gender age groups (valid)"
+    VALIDATION = "Validation results"
+
+    df = df.astype({"completion_time": str, "{id}": str})
+    writer = pd.ExcelWriter(filename, engine="openpyxl")
+    df = df[report_cols]
+    df.to_excel(writer, index=True, sheet_name=VALIDATION)
+
+    # Get the XlsxWriter workbook and worksheet objects
+    sheet = writer.sheets[VALIDATION]
 
     # writer.close()
-
+    adjust_excel_column_width(df, sheet)
     # workbook = load_workbook(filename=filename)
-    # sheet = workbook["Sheet1"]
-    sheet = worksheet
 
     colnames = ["valid", "Geschlecht"]
-
+    # get indices of column names
     col_indices = {
         cell.value: n
         for n, cell in enumerate(list(sheet.rows)[0])
         if cell.value in colnames
     }
 
+    # highlight invalid rows
     for row in sheet.iter_rows(min_row=1, max_row=None, min_col=None, max_col=None):
         if row[col_indices["valid"]].value != "valid":
             for cell in row:
@@ -142,5 +149,7 @@ def report_to_excel(df, filename):
                     start_color="FF001F", end_color="FF001F", fill_type="solid"
                 )
 
+    gender_age(df).to_excel(writer, sheet_name=GENDER_AGE)
+    adjust_excel_column_width(df, writer.sheets[GENDER_AGE])
     # workbook.save(filename=filename)
     writer.close()

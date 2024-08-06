@@ -1,6 +1,6 @@
 import os
 from dacstore.utils import get_data, report_to_excel
-from dacstore.validation import valid
+from dacstore.validation import valid, gender_age
 
 
 def check_valid(filename=None, user=None, password=None):
@@ -17,7 +17,9 @@ def check_valid(filename=None, user=None, password=None):
     print(f"responses: {len(df)}")
     print(f"valid: {valid_fraction}")
     print(df.valid.value_counts(normalize=True))
-
+    print(100 * "-")
+    print("Check: Valid answers grouped by gender and age")
+    print(gender_age(df))
     # df[report_cols].style.apply(highlight_invalid, axis=1)
     report_to_excel(df, "valid.xlsx")
 
