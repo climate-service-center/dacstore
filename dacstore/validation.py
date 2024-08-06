@@ -2,7 +2,9 @@ import pandas as pd
 import copy
 
 
-completion_time_limit = pd.Timedelta(3, "min")
+COMPLETION_TIME_LIMIT = pd.Timedelta(156, "sec")
+
+SCORE_LIMIT = 0.5
 
 NOT_COMPLETED = 1
 COMPLETION_TIME_TOO_LONG = 2
@@ -124,7 +126,7 @@ def check_row(row):
     """Check valid status of a row"""
     status = copy.deepcopy(status_dict)
 
-    if row.completion_time < completion_time_limit:
+    if row.completion_time < COMPLETION_TIME_LIMIT:
         status[COMPLETION_TIME_TOO_LONG]["status"] = True
         status[COMPLETION_TIME_TOO_LONG]["description"] = "completion time too short"
 
@@ -137,7 +139,7 @@ def check_row(row):
 
     score = check_answers(row)
 
-    if score > 0.5:
+    if score > SCORE_LIMIT:
         status[STRAIGHTLINING]["status"] = True
         status[STRAIGHTLINING]["description"] = "answers seem to be random"
 
