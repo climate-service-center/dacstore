@@ -48,5 +48,5 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Results for ${{ runner.os }}-${{ matrix.python-version }}
+        name: Validation results
         path: valid.xlsx

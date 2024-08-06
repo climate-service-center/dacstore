@@ -19,7 +19,7 @@ def check_valid(filename=None, user=None, password=None):
     print(df.valid.value_counts(normalize=True))
 
     # df[report_cols].style.apply(highlight_invalid, axis=1)
-    report_to_excel(df.astype({"completion_time": str}), "valid.xlsx")
+    report_to_excel(df, "valid.xlsx")
 
 
 if __name__ == "__main__":

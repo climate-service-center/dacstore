@@ -104,6 +104,7 @@ def report_to_excel(df, filename):
     from openpyxl.utils import get_column_letter
     from openpyxl.styles import PatternFill
 
+    df = df.astype({"completion_time": str, "{id}": str})
     writer = pd.ExcelWriter(filename, engine="openpyxl")
     df = df[report_cols]
     df.to_excel(writer, index=True, sheet_name="Sheet1")
