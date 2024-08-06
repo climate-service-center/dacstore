@@ -14,7 +14,7 @@ NO_ATTENTION = 4
 status_dict = {
     NOT_COMPLETED: {"description": "survey was not completed", "status": False},
     COMPLETION_TIME_TOO_LONG: {
-        "description": f"completion time was longer than {completion_time_limit}",
+        "description": f"completion time was longer than {COMPLETION_TIME_LIMIT}",
         "status": False,
     },
     STRAIGHTLINING: {"description": "answers seem to be random", "status": False},
