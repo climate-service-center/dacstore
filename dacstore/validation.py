@@ -4,7 +4,7 @@ import copy
 
 COMPLETION_TIME_LIMIT = pd.Timedelta(156, "sec")
 
-SCORE_LIMIT = 0.5
+SCORE_LIMIT = 0.45
 
 NOT_COMPLETED = 1
 COMPLETION_TIME_TOO_LONG = 2
@@ -117,7 +117,7 @@ def check_answers(row):
     for answer, questions in check_cols.items():
         # check if answer might be random
         score += row[questions].value_counts().get(answer, 0)
-    print(total_cols(row))
+    # print(total_cols(row))
     return score / total_cols(row)
 
 
@@ -125,20 +125,19 @@ def check_row(row):
     """Check valid status of a row"""
     status = copy.deepcopy(status_dict)
 
+    if row.Status != "Completed":
+        status[NOT_COMPLETED]["status"] = True
+        return create_row_status(status)
+
     if row.completion_time < COMPLETION_TIME_LIMIT:
         status[COMPLETION_TIME_TOO_LONG]["status"] = True
         status[COMPLETION_TIME_TOO_LONG]["description"] = "completion time too short"
-
-    if row.Status != "Completed":
-        status[NOT_COMPLETED]["status"] = True
 
     for k, v in attention_col.items():
         if row[k] != v:
             status[NO_ATTENTION]["status"] = True
 
-    score = 1.0
-    if row.Status == "Completed":
-        score = check_answers(row)
+    score = check_answers(row)
 
     if score > SCORE_LIMIT:
         status[STRAIGHTLINING]["status"] = True
