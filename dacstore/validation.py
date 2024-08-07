@@ -94,10 +94,10 @@ attention_col = {
 }
 
 
-def total_cols():
+def total_cols(row):
     all_cols = 0
-    for k, v in check_cols.items():
-        all_cols += len(v)
+    for questions in check_cols.values():
+        all_cols += len(row[questions][~row[questions].isnull()])
     return all_cols
 
 
@@ -114,12 +114,11 @@ def create_row_status(status):
 
 def check_answers(row):
     score = 0
-    for k, v in check_cols.items():
+    for answer, questions in check_cols.items():
         # check if answer might be random
-        for reply in row[v]:
-            if reply == k:
-                score += 1
-    return score / total_cols()
+        score += row[questions].value_counts().get(answer, 0)
+    print(total_cols(row))
+    return score / total_cols(row)
 
 
 def check_row(row):
@@ -137,7 +136,9 @@ def check_row(row):
         if row[k] != v:
             status[NO_ATTENTION]["status"] = True
 
-    score = check_answers(row)
+    score = 1.0
+    if row.Status == "Completed":
+        score = check_answers(row)
 
     if score > SCORE_LIMIT:
         status[STRAIGHTLINING]["status"] = True
