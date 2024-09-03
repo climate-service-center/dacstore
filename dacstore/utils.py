@@ -3,11 +3,13 @@ import requests
 from io import StringIO
 
 from .config import drop_cols, cleaning_dict, translation_columns, translation_answers
-from .validation import gender_age
+from .validation import gender_age, valid, attention_col
 
 survey_id1 = 1740754  # Direct Air Capture in Germany
 survey_id2 = 1837044  # Direct Air Capture in Germany - Bilendi
 api_url = "https://api.surveyhero.com/v1/surveys/{survey_id}/responses"
+
+survey_id_bilendi = survey_id2
 
 all_surveys = [survey_id1, survey_id2]
 
@@ -83,11 +85,22 @@ def make_request(survey_id, user, password):
             "Direct Air Capture (DAC)\n", "Direct Air Capture (DAC)"
         )
     )
-    return get_df(source)
+    df = get_df(source)
+    # set attention column to default if survey has no attention column
+    for k, v in attention_col.items():
+        if k not in df.columns:
+            df[k] = v
+    return df
 
 
 def get_data(
-    source=None, user=None, password=None, translate=True, drop=True, survey_ids=None
+    source=None,
+    user=None,
+    password=None,
+    translate=False,
+    drop=True,
+    survey_ids=None,
+    validate=False,
 ):
     """read csv from file or surveyhero api"""
     if survey_ids is None:
@@ -96,13 +109,19 @@ def get_data(
         # read from csv
         df = get_df(source)
     else:
+        if not isinstance(survey_ids, list):
+            survey_ids = [survey_ids]
         df = pd.concat(
             [make_request(survey_id, user, password) for survey_id in survey_ids]
         )
 
+    df["completion_time"] = df["Last updated on"] - df["Started on"]
     df = strip_df(df)
     df = strip_double_whitespaces(df)
     df = df.replace(cleaning_dict)
+
+    if validate is True:
+        df["valid"] = valid(df)
 
     if translate:
         df = df.rename(columns=translation_columns)
@@ -110,8 +129,6 @@ def get_data(
 
     if drop is True:
         df = df.drop(columns=drop_cols)
-
-    df["completion_time"] = df["Last updated on"] - df["Started on"]
 
     df = strip_df(df)
 
