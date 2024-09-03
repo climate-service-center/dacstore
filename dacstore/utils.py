@@ -5,9 +5,11 @@ from io import StringIO
 from .config import drop_cols, cleaning_dict, translation_columns, translation_answers
 from .validation import gender_age
 
-survey_id = 1837044
-api_url = f"https://api.surveyhero.com/v1/surveys/{survey_id}/responses"
+survey_id1 = 1740754  # Direct Air Capture in Germany
+survey_id2 = 1837044  # Direct Air Capture in Germany - Bilendi
+api_url = "https://api.surveyhero.com/v1/surveys/{survey_id}/responses"
 
+all_surveys = [survey_id1, survey_id2]
 
 report_cols = [
     "{id}",
@@ -55,30 +57,48 @@ def to_results(counts, categories, labels=None, fact=100):
     return results
 
 
-def get_data(source=None, user=None, password=None, translate=True, drop=True):
+def get_df(source):
     """read csv from file or surveyhero api"""
-    if source is None:
-        # get data from surveyhero api
-        # params = {"format": "csv", "status": "completed"}
-        params = {"format": "csv"}
-        r = requests.get(api_url, params=params, auth=(user, password))
-        print(r.status_code)
-        print(f"API request status code: {r.status_code}")
-        source = StringIO(
-            r.content.decode("utf-8").replace(
-                "Direct Air Capture (DAC)\n", "Direct Air Capture (DAC)"
-            )
-        )
-
-    print(f"reading from: {source}")
-
-    df = pd.read_csv(
+    return pd.read_csv(
         source,
         index_col="ID",
         date_format="%d.%m.%Y %H:%M:%S",
         parse_dates=[1, 2],
         skipinitialspace=True,
     )
+
+
+def make_request(survey_id, user, password):
+    """ "make request to surveyhero api and return dataframe"""
+    # get data from surveyhero api
+    # params = {"format": "csv", "status": "completed"}
+    params = {"format": "csv"}
+    url = api_url.format(survey_id=survey_id)
+    print(f"requesting data from {url}")
+    r = requests.get(url, params=params, auth=(user, password))
+    print(r.status_code)
+    print(f"API request status code: {r.status_code}")
+    source = StringIO(
+        r.content.decode("utf-8").replace(
+            "Direct Air Capture (DAC)\n", "Direct Air Capture (DAC)"
+        )
+    )
+    return get_df(source)
+
+
+def get_data(
+    source=None, user=None, password=None, translate=True, drop=True, survey_ids=None
+):
+    """read csv from file or surveyhero api"""
+    if survey_ids is None:
+        survey_ids = all_surveys
+    if source is not None:
+        # read from csv
+        df = get_df(source)
+    else:
+        df = pd.concat(
+            [make_request(survey_id, user, password) for survey_id in survey_ids]
+        )
 
     df = strip_df(df)
     df = strip_double_whitespaces(df)
