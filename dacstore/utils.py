@@ -65,7 +65,7 @@ def get_df(source):
         source,
         index_col="ID",
         date_format="%d.%m.%Y %H:%M:%S",
-        parse_dates=[1, 2],
+        parse_dates=["Started on", "Last updated on"],
         skipinitialspace=True,
     )
 
@@ -101,8 +101,9 @@ def get_data(
     drop=True,
     survey_ids=None,
     validate=False,
+    drop_invalid=False,
 ):
-    """read csv from file or surveyhero api"""
+    """read dataframe from file or surveyhero api"""
     if survey_ids is None:
         survey_ids = all_surveys
     if source is not None:
@@ -116,7 +117,8 @@ def get_data(
             [make_request(survey_id, user, password) for survey_id in survey_ids]
         )
 
-    df["completion_time"] = df["Last updated on"] - df["Started on"]
+    if "completion_time" not in df.columns:
+        df["completion_time"] = df["Last updated on"] - df["Started on"]
     df = strip_df(df)
     df = strip_double_whitespaces(df)
     df = df.replace(cleaning_dict)
@@ -132,6 +134,9 @@ def get_data(
         df = df.drop(columns=drop_cols)
 
     df = strip_df(df)
+
+    if drop_invalid:
+        df = df[df.valid == "valid"]
 
     return df
 
