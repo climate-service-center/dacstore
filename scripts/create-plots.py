@@ -4,9 +4,6 @@ from dacstore.utils import get_data
 from dacstore.plot import plot
 
 
-df = get_data(source="./data/data.csv", drop=False, translate=True, drop_invalid=True)
-
-
 def plot_knowledge(fname="figs/knowledge.png"):
     # shorts = {
     #     "DAC Awareness": "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
@@ -146,8 +143,13 @@ def plot_aux(fname):
     )
 
 
-plot_knowledge("figs/knowledge.png")
-plot_support("figs/support.png")
-plot_trust("figs/trust.png")
-plot_risk("figs/risk.png")
-plot_aux("figs/aux.png")
+if __name__ == "__main__":
+    df = get_data(
+        source="./data/data.csv", drop=False, translate=True, drop_invalid=True
+    )
+    print(f"creating plots from {len(df)} valid responses...")
+    plot_knowledge("figs/knowledge.png")
+    plot_support("figs/support.png")
+    plot_trust("figs/trust.png")
+    plot_risk("figs/risk.png")
+    plot_aux("figs/aux.png")
