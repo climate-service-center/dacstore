@@ -1,4 +1,4 @@
-name: update
+name: fetch
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -15,7 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  update:
+  fetch:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -42,7 +42,22 @@ jobs:
         SURVEY_HERO_USER: ${{ secrets.SURVEY_HERO_USER }}
         SURVEY_HERO_PASSWORD: ${{ secrets.SURVEY_HERO_PASSWORD }}
       run: |
-        python main.py
+        python scripts/fetch.py
+
+    - name: Check if there are any changes
+      id: verify_diff
+      run: |
+        git diff --quiet ./data/data.csv || echo "changed=true" >> $GITHUB_OUTPUT
+
+    - name: Commit and push
+      if: steps.verify_diff.outputs.changed == 'true'
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        (pre-commit run --all-files) || true
+        git commit data/data.csv -m "update data.csv"
+        git status
+        git push
 
     - name: Upload results
       if: always()
