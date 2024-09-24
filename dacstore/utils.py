@@ -111,6 +111,7 @@ def get_data(
     else:
         if not isinstance(survey_ids, list):
             survey_ids = [survey_ids]
+        print(f"survey_ids: {survey_ids}")
         df = pd.concat(
             [make_request(survey_id, user, password) for survey_id in survey_ids]
         )

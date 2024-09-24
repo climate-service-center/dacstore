@@ -1,5 +1,5 @@
 import os
-from dacstore.utils import get_data, report_to_excel, survey_id_bilendi
+from dacstore.utils import get_data, report_to_excel
 from dacstore.validation import gender_age
 
 
@@ -7,7 +7,7 @@ csv_file = "./data/data.csv"
 
 
 def update_csv(filename=None, user=None, password=None):
-    """Check which responses are valid and report"""
+    """Fetch and update csv"""
     if user is None:
         user = os.environ.get("SURVEY_HERO_USER")
     if password is None:
@@ -19,7 +19,7 @@ def update_csv(filename=None, user=None, password=None):
         password,
         translate=False,
         drop=False,
-        survey_ids=survey_id_bilendi,
+        survey_ids=None,
         validate=True,
     )
 
@@ -46,7 +46,11 @@ def check_valid(filename=None, user=None, password=None):
     print(gender_age(df))
     # df[report_cols].style.apply(highlight_invalid, axis=1)
     report_to_excel(df, "valid.xlsx")
+    return df
 
 
 if __name__ == "__main__":
-    check_valid()
+    df = check_valid()
+    # drop invalids
+    df = df[df.valid == "valid"]
+    print("Number of valid responses:", len(df))
