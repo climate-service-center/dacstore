@@ -3,8 +3,11 @@ from dacstore.utils import get_data, report_to_excel, survey_id_bilendi
 from dacstore.validation import gender_age
 
 
-def check_valid(filename=None, user=None, password=None):
-    """Check which responses are valid and report for Bilendi"""
+csv_file = "./data/data.csv"
+
+
+def update_csv(filename=None, user=None, password=None):
+    """Check which responses are valid and report"""
     if user is None:
         user = os.environ.get("SURVEY_HERO_USER")
     if password is None:
@@ -19,6 +22,19 @@ def check_valid(filename=None, user=None, password=None):
         survey_ids=survey_id_bilendi,
         validate=True,
     )
+
+    df.to_csv(csv_file)
+    return df
+
+
+def check_valid(filename=None, user=None, password=None):
+    """Check which responses are valid and report for Bilendi"""
+    if user is None:
+        user = os.environ.get("SURVEY_HERO_USER")
+    if password is None:
+        password = os.environ.get("SURVEY_HERO_PASSWORD")
+
+    df = update_csv(filename, user, password)
     # df["valid"] = valid(df)
 
     valid_fraction = df.valid.value_counts().valid / len(df)
