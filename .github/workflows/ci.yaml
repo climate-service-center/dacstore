@@ -94,7 +94,7 @@ jobs:
         SURVEY_HERO_USER: ${{ secrets.SURVEY_HERO_USER }}
         SURVEY_HERO_PASSWORD: ${{ secrets.SURVEY_HERO_PASSWORD }}
       run: |
-        python scripts/plot.py
+        python scripts/create-plots.py
 
     - name: Check if there are any changes
       id: verify_diff
