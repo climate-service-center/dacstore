@@ -87,4 +87,5 @@ def likert_plot(
 
     if fname:
         fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
+        plt.close(fig)
     return fig, ax

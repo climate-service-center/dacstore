@@ -3,6 +3,8 @@ from dacstore.dac_analysis import to_results, value_counts
 from dacstore.utils import get_data
 from dacstore.plot import likert_plot
 from dacstore.config import groups_translated
+import matplotlib.pyplot as plt
+
 
 import seaborn as sns  # noqa
 
@@ -179,7 +181,30 @@ def plot_socio_demographics(df, fname):
                 fontsize=8,
             )
     fig = ax.get_figure()
-    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=300)
+    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
+    plt.close(fig)
+
+
+def plot_transport(df, fname):
+    transport = df[groups_translated.get("Transport")]
+    ax = transport.count().plot(
+        kind="bar", title="Which CO2 transportation methods would you agree with?"
+    )
+    for p in ax.patches:
+        width, height = p.get_width(), p.get_height()
+        x, y = p.get_xy()
+        if height > 10:
+            ax.text(
+                x + width / 2,
+                y + height / 2,
+                "{:.0f}".format(height),
+                horizontalalignment="center",
+                verticalalignment="center",
+                fontsize=8,
+            )
+    fig = ax.get_figure()
+    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
+    plt.close(fig)
 
 
 if __name__ == "__main__":
@@ -195,3 +220,4 @@ if __name__ == "__main__":
     plot_climate_change(df, "figs/climate_change.png")
     plot_socio_demographics(df, "figs/socio_demographic.png")
     plot_tampering(df, "figs/tampering.png")
+    plot_transport(df, "figs/transport.png")

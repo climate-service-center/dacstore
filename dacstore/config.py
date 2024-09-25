@@ -56,6 +56,11 @@ groups = {
     "Benefit": [],
     "Safety": [],
     "NIMBY": [],
+    "Distance": [
+        "DAC Anlage",
+        "CO2-Speicherung im Boden",
+        "CO2-Speicherung im Meeresboden",
+    ],
     "Socio Demographic": [
         "Geschlecht",
         "Altersgruppe",
