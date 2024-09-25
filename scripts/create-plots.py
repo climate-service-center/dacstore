@@ -118,7 +118,12 @@ def plot_support(df, fname):
 
 def plot_climate_change(df, fname):
     create_likert_plot(
-        df, fname, "Climate Change", scale="agreement_en", colors=colors, dpi=dpi
+        df,
+        fname,
+        "Climate Change",
+        scale="agreement_en",
+        colors=agreement_cmap,
+        dpi=dpi,
     )
 
 
@@ -131,7 +136,7 @@ def plot_tampering(df, fname):
         fname,
         "Tampering",
         scale="agreement_en",
-        colors=colors,
+        colors=agreement_cmap,
         dpi=dpi,
         labels=labels,
     )
@@ -142,12 +147,20 @@ def plot_trust(df, fname):
         "Environmental Protection Organizations and NGOs": "Environmental Protection\n Organizations and NGOs"
     }
     create_likert_plot(
-        df, fname, "Trust", scale="trust_en", colors=colors, dpi=dpi, labels=labels
+        df,
+        fname,
+        "Trust",
+        scale="trust_en",
+        colors=agreement_cmap,
+        dpi=dpi,
+        labels=labels,
     )
 
 
 def plot_risk(df, fname):
-    create_likert_plot(df, fname, "Risk", scale="agreement_en", colors=colors, dpi=dpi)
+    create_likert_plot(
+        df, fname, "Risk", scale="agreement_en", colors=agreement_cmap, dpi=dpi
+    )
 
 
 def plot_aux(df, fname):
