@@ -42,7 +42,7 @@ def create_likert_plot(
     )
 
 
-def create_bar_plot(df, fname, title=None, min_count=10):
+def create_bar_plot(df, fname, title=None, min_count=10, dpi=300):
     """Create a bar plot counting values in a column"""
     ax = df.count().plot(kind="bar", title=title)
     for p in ax.patches:
@@ -58,7 +58,7 @@ def create_bar_plot(df, fname, title=None, min_count=10):
                 fontsize=8,
             )
     fig = ax.get_figure()
-    fig.savefig(fname, transparent=True, bbox_inches="tight")
+    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
     plt.close(fig)
 
 
