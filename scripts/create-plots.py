@@ -100,6 +100,21 @@ def plot_climate_change(df, fname):
     )
 
 
+def plot_tampering(df, fname):
+    labels = {
+        "Trying to influence the climate system by using DAC reflects human arrogance": "Trying to influence the climate system by\n using DAC reflects human arrogance"
+    }
+    create_likert_plot(
+        df,
+        fname,
+        "Tampering",
+        scale="agreement_en",
+        colors=colors,
+        dpi=dpi,
+        labels=labels,
+    )
+
+
 def plot_trust(df, fname):
     labels = {
         "Environmental Protection Organizations and NGOs": "Environmental Protection\n Organizations and NGOs"
@@ -179,3 +194,4 @@ if __name__ == "__main__":
     plot_aux(df, "figs/aux.png")
     plot_climate_change(df, "figs/climate_change.png")
     plot_socio_demographics(df, "figs/socio_demographic.png")
+    plot_tampering(df, "figs/tampering.png")
