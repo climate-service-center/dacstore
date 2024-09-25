@@ -42,6 +42,26 @@ def create_likert_plot(
     )
 
 
+def create_bar_plot(df, fname, title=None, min_count=10):
+    """Create a bar plot counting values in a column"""
+    ax = df.count().plot(kind="bar", title=title)
+    for p in ax.patches:
+        width, height = p.get_width(), p.get_height()
+        x, y = p.get_xy()
+        if height > min_count:
+            ax.text(
+                x + width / 2,
+                y + height / 2,
+                "{:.0f}".format(height),
+                horizontalalignment="center",
+                verticalalignment="center",
+                fontsize=8,
+            )
+    fig = ax.get_figure()
+    fig.savefig(fname, transparent=True, bbox_inches="tight")
+    plt.close(fig)
+
+
 def plot_knowledge(df, fname="figs/knowledge.png"):
     # shorts = {
     #     "DAC Awareness": "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
@@ -187,24 +207,18 @@ def plot_socio_demographics(df, fname):
 
 def plot_transport(df, fname):
     transport = df[groups_translated.get("Transport")]
-    ax = transport.count().plot(
-        kind="bar", title="Which CO2 transportation methods would you agree with?"
+    create_bar_plot(
+        transport, fname, title="Which CO2 transportation methods would you agree with?"
     )
-    for p in ax.patches:
-        width, height = p.get_width(), p.get_height()
-        x, y = p.get_xy()
-        if height > 10:
-            ax.text(
-                x + width / 2,
-                y + height / 2,
-                "{:.0f}".format(height),
-                horizontalalignment="center",
-                verticalalignment="center",
-                fontsize=8,
-            )
-    fig = ax.get_figure()
-    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
-    plt.close(fig)
+
+
+def plot_distance(df, fname):
+    distance = df[groups_translated.get("Distance")]
+    create_bar_plot(
+        distance,
+        fname,
+        title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+    )
 
 
 if __name__ == "__main__":
@@ -221,3 +235,4 @@ if __name__ == "__main__":
     plot_socio_demographics(df, "figs/socio_demographic.png")
     plot_tampering(df, "figs/tampering.png")
     plot_transport(df, "figs/transport.png")
+    plot_distance(df, "figs/distance.png")
