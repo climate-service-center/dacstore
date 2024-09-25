@@ -149,9 +149,12 @@ def check_row(row):
 def gender_age(df):
     """Return gender age groups of valid answers"""
     return (
-        df[df.valid == "valid"]
+        df[
+            df.valid == "valid"
+        ]  # .sort_values(['Geschlecht','Altersgruppe'],ascending=False)
         .groupby("Geschlecht")
         .Altersgruppe.value_counts(normalize=False)
+        .sort_index()
     )
 
 

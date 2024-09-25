@@ -1,7 +1,14 @@
 from dacstore.config import agreement_cmap, categories, colors
 from dacstore.dac_analysis import to_results, value_counts
 from dacstore.utils import get_data
-from dacstore.plot import plot
+from dacstore.plot import likert_plot
+
+import seaborn as sns  # noqa
+
+
+sns.set_theme(style="darkgrid")
+
+dpi = 300
 
 
 def plot_knowledge(fname="figs/knowledge.png"):
@@ -43,7 +50,7 @@ def plot_knowledge(fname="figs/knowledge.png"):
     counts = value_counts(knowledge)
     results = to_results(counts, category_names, labels)
 
-    plot(results, category_names, fname=fname)
+    likert_plot(results, category_names, fname=fname, dpi=dpi)
 
 
 def plot_support(fname):
@@ -60,7 +67,7 @@ def plot_support(fname):
     counts = value_counts(acceptance)
     results = to_results(counts, category_names)
 
-    plot(results, category_names, colors=colors, fname=fname)
+    likert_plot(results, category_names, colors=colors, fname=fname, dpi=dpi)
 
 
 def plot_trust(fname):
@@ -86,7 +93,7 @@ def plot_trust(fname):
     )
 
     colors = agreement_cmap
-    plot(results, category_names, colors=colors, fname=fname)
+    likert_plot(results, category_names, colors=colors, fname=fname, dpi=dpi)
     # plt.show()
 
 
@@ -104,7 +111,7 @@ def plot_risk(fname):
     counts = value_counts(risk)
 
     results = to_results(counts, category_names)
-    plot(results, category_names, colors=agreement_cmap, fname=fname)
+    likert_plot(results, category_names, colors=agreement_cmap, fname=fname, dpi=dpi)
 
 
 def plot_aux(fname):
@@ -133,14 +140,38 @@ def plot_aux(fname):
     }
     counts = value_counts(df[bonus].dropna())
     results = to_results(counts, category_names, labels=labels)
-    plot(
+    likert_plot(
         results,
         category_names,
         colors=agreement_cmap,
         fname=fname,
         height=0.8,
         figsize=(25, 15),
+        dpi=dpi,
     )
+
+
+def plot_socio_demographics(fname):
+    """plot distribution of gender and age"""
+    socio_demo = df.groupby(["Age", "Gender"]).Age.count().unstack()
+    ax = socio_demo.plot(
+        kind="bar", stacked=True, color=["skyblue", "darkmagenta", "sandybrown"]
+    )
+    # annotate
+    for p in ax.patches:
+        width, height = p.get_width(), p.get_height()
+        x, y = p.get_xy()
+        if height > 10:
+            ax.text(
+                x + width / 2,
+                y + height / 2,
+                "{:.0f}".format(height),
+                horizontalalignment="center",
+                verticalalignment="center",
+                fontsize=8,
+            )
+    fig = ax.get_figure()
+    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=300)
 
 
 if __name__ == "__main__":
@@ -153,3 +184,4 @@ if __name__ == "__main__":
     plot_trust("figs/trust.png")
     plot_risk("figs/risk.png")
     plot_aux("figs/aux.png")
+    plot_socio_demographics("figs/socio_demographic.png")

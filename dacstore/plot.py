@@ -8,7 +8,7 @@ except ImportError:
     pass
 
 
-def plot(
+def likert_plot(
     results,
     category_names,
     colors=None,
@@ -16,6 +16,7 @@ def plot(
     height=0.8,
     figsize=(25, 5),
     fname=None,
+    dpi=300,
 ):
     """
     Parameters
@@ -81,5 +82,5 @@ def plot(
     ax.set_yticks(np.arange(len(labels)), labels=labels, size=16)
 
     if fname:
-        fig.savefig(fname, transparent=True, bbox_inches="tight")
+        fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
     return fig, ax
