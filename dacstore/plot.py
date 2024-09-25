@@ -8,14 +8,15 @@ except ImportError:
     pass
 
 
-def plot(
+def likert_plot(
     results,
     category_names,
     colors=None,
     limit=5.0,
-    height=0.8,
-    figsize=(25, 5),
+    height=None,
+    figsize=None,
     fname=None,
+    dpi=300,
 ):
     """
     Parameters
@@ -27,6 +28,10 @@ def plot(
     category_names : list of str
         The category labels.
     """
+    if height is None:
+        height = 0.8
+    if figsize is None:
+        figsize = (25, 5)
     labels = list(results.keys())
     data = np.array(list(results.values()))
     data_cum = data.cumsum(axis=1)
@@ -81,5 +86,6 @@ def plot(
     ax.set_yticks(np.arange(len(labels)), labels=labels, size=16)
 
     if fname:
-        fig.savefig(fname, transparent=True, bbox_inches="tight")
+        fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
+        plt.close(fig)
     return fig, ax

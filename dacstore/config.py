@@ -2,48 +2,73 @@ import numpy as np
 
 
 groups = {
-    "Climate Change": {
+    "Climate Change": [
         "Der Klimawandel findet tatsächlich statt.",
         "Der Klimawandel ist ein ernstes Problem.",
         "Menschliche Aktivitäten sind die Hauptursache des Klimawandels.",
         "Wir alle sollten uns bemühen, unseren CO2-Ausstoß zu reduzieren.",
-    },
-    "DAC Awareness": {
+    ],
+    "DAC Awareness": [
         "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
-    },
-    "DAC Knowledge": "Wie gut sind ihre Kenntnisse dieser Technologien?",
-    "Storage Awareness": {"Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?"},
-    "Initial Storage Support": {
+    ],
+    "DAC Knowledge": [
+        "Wie gut sind ihre Kenntnisse dieser Technologien?",
+    ],
+    "Storage Awareness": [
+        "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?",
+    ],
+    "Initial Storage Support": [
         "CO2-Speicherung",
-    },
-    "Final Storage Support": {
+    ],
+    "Final Storage Support": [
         "CO2-Speicherung.1",
-    },
-    "Tampering": {
+    ],
+    "Tampering": [
+        #     "DAC ist eine ausgereifte saubere Technologie.",
         "Menschen sollten die Natur nicht auf diese Weise manipulieren.",
         "Ich denke nicht, dass das Einbringen von CO2 in den Boden eine gute Idee ist.",
         "Versuche, das Klimasystem durch die Anwendung von DAC zu beeinflussen, zeugen von menschlichem Hochmut.",
-    },
-    "Transport": {
+    ],
+    "Transport": [
         "LKW",
         "Eisenbahn",
         "Pipeline (Rohrleitungstransport)",
         "Tanker (Schiff)",
         "Mit keiner",
         "Weiß nicht",
-    },
-    "Risk": {},
-    "Trust": {},
-    "Benefit": {},
-    "Safety": {},
-    "NIMBY": {},
-    "Socio Demographic": {
+    ],
+    "Risk": [
+        "DAC ist sicher.",
+        "CO2-Speicherung ist sicher.",
+        "CO2-Speicherung könnte Erdbeben verursachen.",
+        "CO2-Speicherung könnte Explosionen verursachen.",
+        "CO2-Speicherung könnte CO2-Leckagen verursachen.",
+    ],
+    "Trust": [
+        "Politik",
+        "Industrie",
+        "Wissenschaft",
+        "Vereinte Nationen (UNO)",
+        "Europäische Union",
+        "Nichtregierungs- und Umweltschutzorganisationen",
+        "Medien",
+    ],
+    "Benefit": [],
+    "Safety": [],
+    "NIMBY": [],
+    "Distance": [
+        "DAC Anlage",
+        "CO2-Speicherung im Boden",
+        "CO2-Speicherung im Meeresboden",
+    ],
+    "Socio Demographic": [
         "Geschlecht",
         "Altersgruppe",
         # "Höchster Bildungsabschluss",
         # "Beruf",
-    },
+    ],
 }
+
 
 col_shorts = {
     "DAC Awareness": "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
@@ -411,3 +436,10 @@ green = [0.24805844, 0.66720492, 0.3502499, 1.0]
 
 agreement_cmap = [red, orange, yellow, lightgreen, green, "gray"]
 colors = [red, orange, yellow, lightgreen, green]
+
+
+groups_translated = groups.copy()
+
+for k, v in groups.items():
+    for col in v:
+        groups_translated[k] = [translation_columns[col] for col in v]

@@ -5,3 +5,4 @@ requests
 jinja2
 openpyxl
 xlsxwriter
+seaborn
