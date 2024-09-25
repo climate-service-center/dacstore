@@ -13,8 +13,8 @@ def likert_plot(
     category_names,
     colors=None,
     limit=5.0,
-    height=0.8,
-    figsize=(25, 5),
+    height=None,
+    figsize=None,
     fname=None,
     dpi=300,
 ):
@@ -28,6 +28,10 @@ def likert_plot(
     category_names : list of str
         The category labels.
     """
+    if height is None:
+        height = 0.8
+    if figsize is None:
+        figsize = (25, 5)
     labels = list(results.keys())
     data = np.array(list(results.values()))
     data_cum = data.cumsum(axis=1)

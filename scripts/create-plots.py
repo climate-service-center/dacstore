@@ -2,6 +2,7 @@ from dacstore.config import agreement_cmap, categories, colors
 from dacstore.dac_analysis import to_results, value_counts
 from dacstore.utils import get_data
 from dacstore.plot import likert_plot
+from dacstore.config import groups_translated
 
 import seaborn as sns  # noqa
 
@@ -11,7 +12,35 @@ sns.set_theme(style="darkgrid")
 dpi = 300
 
 
-def plot_knowledge(fname="figs/knowledge.png"):
+def create_likert_plot(
+    df,
+    fname,
+    group,
+    scale="agreement_en",
+    colors=colors,
+    dpi=300,
+    labels=None,
+    height=None,
+    figsize=None,
+):
+    if isinstance(group, str):
+        group = groups_translated[group]
+    cols = df[group].dropna()
+    category_names = categories[scale]
+    counts = value_counts(cols)
+    results = to_results(counts, category_names, labels=labels)
+    likert_plot(
+        results,
+        category_names,
+        colors=colors,
+        fname=fname,
+        dpi=dpi,
+        height=height,
+        figsize=figsize,
+    )
+
+
+def plot_knowledge(df, fname="figs/knowledge.png"):
     # shorts = {
     #     "DAC Awareness": "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
     #     "DAC Knowledge": "Wie gut sind ihre Kenntnisse dieser Technologien?",
@@ -53,73 +82,39 @@ def plot_knowledge(fname="figs/knowledge.png"):
     likert_plot(results, category_names, fname=fname, dpi=dpi)
 
 
-def plot_support(fname):
+def plot_support(df, fname):
     acceptance = [
         "Initial DAC Support",
         "Final DAC Support",
         "Initial Storage Support",
         "Final Storage Support",
     ]
-
-    acceptance = df[acceptance].dropna()
-
-    category_names = categories["support_en"]
-    counts = value_counts(acceptance)
-    results = to_results(counts, category_names)
-
-    likert_plot(results, category_names, colors=colors, fname=fname, dpi=dpi)
-
-
-def plot_trust(fname):
-    trust = [
-        "Politicians",
-        "Industry",
-        "Science",
-        "United Nations (UN)",
-        "European Union",
-        "Environmental Protection Organizations and NGOs",
-        "Media",
-    ]
-    trust = df[trust].dropna()
-
-    category_names = categories["trust_en"]
-    counts = value_counts(trust)
-    results = to_results(
-        counts,
-        category_names,
-        labels={
-            "Environmental Protection Organizations and NGOs": "Environmental Protection\n Organizations and NGOs"
-        },
+    create_likert_plot(
+        df, fname, acceptance, scale="support_en", colors=colors, dpi=dpi
     )
 
-    colors = agreement_cmap
-    likert_plot(results, category_names, colors=colors, fname=fname, dpi=dpi)
-    # plt.show()
+
+def plot_climate_change(df, fname):
+    create_likert_plot(
+        df, fname, "Climate Change", scale="agreement_en", colors=colors, dpi=dpi
+    )
 
 
-def plot_risk(fname):
-    risk = [
-        "DAC is a safe technology",
-        "CO2-Storage is a safe technology",
-        "CO2-Storage could cause earthquakes",
-        "CO2-Storage could cause explosions",
-        "CO2-Storage could cause toxic leaks",
-    ]
-    risk = df[risk].dropna()
-
-    category_names = categories["agreement_en"]
-    counts = value_counts(risk)
-
-    results = to_results(counts, category_names)
-    likert_plot(results, category_names, colors=agreement_cmap, fname=fname, dpi=dpi)
+def plot_trust(df, fname):
+    labels = {
+        "Environmental Protection Organizations and NGOs": "Environmental Protection\n Organizations and NGOs"
+    }
+    create_likert_plot(
+        df, fname, "Trust", scale="trust_en", colors=colors, dpi=dpi, labels=labels
+    )
 
 
-def plot_aux(fname):
+def plot_risk(df, fname):
+    create_likert_plot(df, fname, "Risk", scale="agreement_en", colors=colors, dpi=dpi)
+
+
+def plot_aux(df, fname):
     bonus = [
-        "Climate change is really happening",
-        "Climate change is a serious problem",
-        "Human activities are the main cause of climate change",
-        "We should all make an effort to reduce or CO2 emissions",
         "Humans should not be tampering with nature in this way",
         "I don’t think that injecting CO2 into the ground is a good idea",
         "DAC is a mature clean technology",
@@ -130,28 +125,26 @@ def plot_aux(fname):
         "Including DAC as a part of an overall strategy can help Germany achieve its climate goals and limit climate change to 1.5°C",
         "DAC is an efficient technology to fight climate change",
     ]
-
-    category_names = categories["agreement_en"]
     labels = {
         "Reducing CO2 emissions would be more cost efficient than using DAC": "Reducing CO2 emissions would be more\n cost efficient than using DAC",
         "DAC could help capture emissions from hard-to-abate sectors such as agriculture or cement production": "DAC could help capture emissions from hard-to-abate\n sectors such as agriculture or cement production",
         "Trying to influence the climate system by using DAC reflects human arrogance": "Trying to influence the climate system\n by using DAC reflects human arrogance",
         "Including DAC as a part of an overall strategy can help Germany achieve its climate goals and limit climate change to 1.5°C": "Including DAC as a part of an overall strategy can help\n Germany achieve its climate goals and limit\n climate change to 1.5°C",
     }
-    counts = value_counts(df[bonus].dropna())
-    results = to_results(counts, category_names, labels=labels)
-    likert_plot(
-        results,
-        category_names,
+    create_likert_plot(
+        df,
+        fname,
+        bonus,
+        scale="agreement_en",
         colors=agreement_cmap,
-        fname=fname,
+        dpi=dpi,
+        labels=labels,
         height=0.8,
         figsize=(25, 15),
-        dpi=dpi,
     )
 
 
-def plot_socio_demographics(fname):
+def plot_socio_demographics(df, fname):
     """plot distribution of gender and age"""
     socio_demo = df.groupby(["Age", "Gender"]).Age.count().unstack()
     ax = socio_demo.plot(
@@ -179,9 +172,10 @@ if __name__ == "__main__":
         source="./data/data.csv", drop=False, translate=True, drop_invalid=True
     )
     print(f"creating plots from {len(df)} valid responses...")
-    plot_knowledge("figs/knowledge.png")
-    plot_support("figs/support.png")
-    plot_trust("figs/trust.png")
-    plot_risk("figs/risk.png")
-    plot_aux("figs/aux.png")
-    plot_socio_demographics("figs/socio_demographic.png")
+    plot_knowledge(df, "figs/knowledge.png")
+    plot_support(df, "figs/support.png")
+    plot_trust(df, "figs/trust.png")
+    plot_risk(df, "figs/risk.png")
+    plot_aux(df, "figs/aux.png")
+    plot_climate_change(df, "figs/climate_change.png")
+    plot_socio_demographics(df, "figs/socio_demographic.png")
