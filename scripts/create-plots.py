@@ -130,10 +130,10 @@ def plot_risk(df, fname):
 
 def plot_aux(df, fname):
     bonus = [
-        "Humans should not be tampering with nature in this way",
-        "I don’t think that injecting CO2 into the ground is a good idea",
+        #  "Humans should not be tampering with nature in this way",
+        # "I don’t think that injecting CO2 into the ground is a good idea",
         "DAC is a mature clean technology",
-        "Trying to influence the climate system by using DAC reflects human arrogance",
+        # "Trying to influence the climate system by using DAC reflects human arrogance",
         "Reducing CO2 emissions would be more cost efficient than using DAC",
         "Paying €100 to capture 1 ton of CO2 is a reasonable price",
         "DAC could help capture emissions from hard-to-abate sectors such as agriculture or cement production",
