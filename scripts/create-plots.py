@@ -18,17 +18,21 @@ def create_likert_plot(
     df,
     fname,
     group,
-    scale="agreement_en",
+    scale=None,
     colors=colors,
     dpi=300,
     labels=None,
     height=None,
     figsize=None,
+    title=None,
 ):
     if isinstance(group, str):
         group = groups_translated[group]
     cols = df[group].dropna()
-    category_names = categories[scale]
+    if scale is not None:
+        category_names = categories[scale]
+    else:
+        category_names = None
     counts = value_counts(cols)
     results = to_results(counts, category_names, labels=labels)
     likert_plot(
@@ -39,6 +43,7 @@ def create_likert_plot(
         dpi=dpi,
         height=height,
         figsize=figsize,
+        title=title,
     )
 
 
@@ -163,6 +168,26 @@ def plot_risk(df, fname):
     )
 
 
+def plot_distance(df, fname):
+    # distance = df[groups_translated.get("Distance")]
+    create_likert_plot(
+        df,
+        fname,
+        "Distance",
+        scale="distance_en",
+        colors=agreement_cmap,
+        dpi=dpi,
+        title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+    )
+
+
+#     create_bar_plot(
+#         distance,
+#         fname,
+#         title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+#     )
+
+
 def plot_aux(df, fname):
     bonus = [
         #  "Humans should not be tampering with nature in this way",
@@ -225,13 +250,13 @@ def plot_transport(df, fname):
     )
 
 
-def plot_distance(df, fname):
-    distance = df[groups_translated.get("Distance")]
-    create_bar_plot(
-        distance,
-        fname,
-        title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
-    )
+# def plot_distance(df, fname):
+#     distance = df[groups_translated.get("Distance")]
+#     create_bar_plot(
+#         distance,
+#         fname,
+#         title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+#     )
 
 
 if __name__ == "__main__":

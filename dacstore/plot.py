@@ -17,6 +17,7 @@ def likert_plot(
     figsize=None,
     fname=None,
     dpi=300,
+    title=None,
 ):
     """
     Parameters
@@ -41,7 +42,10 @@ def likert_plot(
         category_colors = colors
 
     fig, ax = plt.subplots(figsize=figsize)
-    # fig.suptitle("How much do you trust in these groups to act in the interest of society?", fontsize=16)
+    if title:
+        plt.title(title, y=1.2, fontsize=24)
+        # plt.text(0.5, 1.2, title, horizontalalignment='center', fontsize=24, transform = ax.transAxes)
+        # fig.suptitle(title, fontsize=24)
     ax.invert_yaxis()
     ax.xaxis.set_visible(False)
     ax.set_xlim(0, np.sum(data, axis=1).max())

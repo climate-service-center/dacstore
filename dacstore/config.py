@@ -409,6 +409,9 @@ agreement = [
     "I dont know",
 ]
 
+distance = ["Nowhere in Germany", "100 km", "10 km", "1 km", "500 m", "I dont know"]
+
+
 gender = [
     "Male",
     "Diverse",
@@ -425,6 +428,7 @@ categories = {
     "agreement_en": agreement,
     "gender_en": gender,
     "age": age,
+    "distance_en": distance,
 }
 
 red = [0.89888504, 0.30549789, 0.20676663, 1.0]
