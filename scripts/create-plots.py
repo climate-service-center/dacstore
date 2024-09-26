@@ -181,6 +181,19 @@ def plot_distance(df, fname):
     )
 
 
+def plot_emotions(df, fname):
+    # distance = df[groups_translated.get("Distance")]
+    create_likert_plot(
+        df,
+        fname,
+        "Distance",
+        scale="distance_en",
+        colors=agreement_cmap,
+        dpi=dpi,
+        title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+    )
+
+
 #     create_bar_plot(
 #         distance,
 #         fname,
@@ -246,8 +259,38 @@ def plot_socio_demographics(df, fname):
 def plot_transport(df, fname):
     transport = df[groups_translated.get("Transport")]
     create_bar_plot(
-        transport, fname, title="Which CO2 transportation methods would you agree with?"
+        transport,
+        fname,
+        title="Which CO2 transportation methods would you agree with?",
     )
+
+
+def plot_emotion(df, fname):
+    col = "What primary emotion do you feel towards DAC technologies?"
+    data = (
+        df[col]
+        .value_counts()
+        .reindex(["Happiness", "Enthusiasm", "Hope", "Worry", "Fear", "Anger"])
+    )
+    # remove index name so it is not plotted as caption
+    data.index.name = None
+    ax = data.plot(kind="bar", title=col)
+    # annotate
+    for p in ax.patches:
+        width, height = p.get_width(), p.get_height()
+        x, y = p.get_xy()
+        if height > 10:
+            ax.text(
+                x + width / 2,
+                y + height / 2,
+                "{:.0f}".format(height),
+                horizontalalignment="center",
+                verticalalignment="center",
+                fontsize=8,
+            )
+    fig = ax.get_figure()
+    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
+    plt.close(fig)
 
 
 # def plot_distance(df, fname):
@@ -272,5 +315,6 @@ if __name__ == "__main__":
     plot_climate_change(df, "figs/climate_change.png")
     plot_socio_demographics(df, "figs/socio_demographic.png")
     plot_tampering(df, "figs/tampering.png")
-    plot_transport(df, "figs/transport.png")
     plot_distance(df, "figs/distance.png")
+    plot_transport(df, "figs/transport.png")
+    plot_emotion(df, "figs/emotion.png")
