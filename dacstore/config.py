@@ -53,6 +53,14 @@ groups = {
         "Nichtregierungs- und Umweltschutzorganisationen",
         "Medien",
     ],
+    "Emotion": [
+        "Glück",
+        "Hoffnung",
+        "Begeisterung",
+        "Wut",
+        "Sorge",
+        "Angst",
+    ],
     "Benefit": [],
     "Safety": [],
     "NIMBY": [],
@@ -248,7 +256,7 @@ translation_columns = {
     "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?": "How would you rate your knowledge of CO2 Storage?",
     "Direct Air Capture (DAC)": "Initial DAC Support",
     "CO2-Speicherung": "Initial Storage Support",
-    "Welche Hauptemotion empfinden Sie gegenüber DAC-Technologien?": " What main emotion do you feel towards DAC technologies?",
+    "Welche Hauptemotion empfinden Sie gegenüber DAC-Technologien?": "What primary emotion do you feel towards DAC technologies?",
     "DAC ist eine ausgereifte saubere Technologie.": "DAC is a mature clean technology",
     "Menschen sollten die Natur nicht auf diese Weise manipulieren.": "Humans should not be tampering with nature in this way",
     "Ich denke nicht, dass das Einbringen von CO2 in den Boden eine gute Idee ist.": "I don’t think that injecting CO2 into the ground is a good idea",
@@ -409,6 +417,9 @@ agreement = [
     "I dont know",
 ]
 
+distance = ["Nowhere in Germany", "100 km", "10 km", "1 km", "500 m", "I dont know"]
+
+
 gender = [
     "Male",
     "Diverse",
@@ -425,6 +436,7 @@ categories = {
     "agreement_en": agreement,
     "gender_en": gender,
     "age": age,
+    "distance_en": distance,
 }
 
 red = [0.89888504, 0.30549789, 0.20676663, 1.0]
@@ -442,4 +454,6 @@ groups_translated = groups.copy()
 
 for k, v in groups.items():
     for col in v:
-        groups_translated[k] = [translation_columns[col] for col in v]
+        groups_translated[k] = [
+            (translation_columns.get(col) or translation_answers.get(col)) for col in v
+        ]

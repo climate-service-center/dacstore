@@ -31,13 +31,15 @@ def value_counts(df, normalize=True):
     return counts
 
 
-def to_results(counts, categories, labels=None, fact=100):
+def to_results(counts, categories=None, labels=None, fact=100):
     results = {}
     for question, data in counts.items():
         label = question
         if labels:
             label = labels.get(question) or question
-        results[label] = [data.get(k, 0.0) * 100 for k in categories]
+        cats = categories or list(data.keys())
+        print(cats)
+        results[label] = [data.get(k, 0.0) * 100 for k in cats]
     return results
 
 

@@ -18,17 +18,21 @@ def create_likert_plot(
     df,
     fname,
     group,
-    scale="agreement_en",
+    scale=None,
     colors=colors,
     dpi=300,
     labels=None,
     height=None,
     figsize=None,
+    title=None,
 ):
     if isinstance(group, str):
         group = groups_translated[group]
     cols = df[group].dropna()
-    category_names = categories[scale]
+    if scale is not None:
+        category_names = categories[scale]
+    else:
+        category_names = None
     counts = value_counts(cols)
     results = to_results(counts, category_names, labels=labels)
     likert_plot(
@@ -39,6 +43,7 @@ def create_likert_plot(
         dpi=dpi,
         height=height,
         figsize=figsize,
+        title=title,
     )
 
 
@@ -163,6 +168,39 @@ def plot_risk(df, fname):
     )
 
 
+def plot_distance(df, fname):
+    # distance = df[groups_translated.get("Distance")]
+    create_likert_plot(
+        df,
+        fname,
+        "Distance",
+        scale="distance_en",
+        colors=agreement_cmap,
+        dpi=dpi,
+        title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+    )
+
+
+def plot_emotions(df, fname):
+    # distance = df[groups_translated.get("Distance")]
+    create_likert_plot(
+        df,
+        fname,
+        "Distance",
+        scale="distance_en",
+        colors=agreement_cmap,
+        dpi=dpi,
+        title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+    )
+
+
+#     create_bar_plot(
+#         distance,
+#         fname,
+#         title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+#     )
+
+
 def plot_aux(df, fname):
     bonus = [
         #  "Humans should not be tampering with nature in this way",
@@ -221,17 +259,47 @@ def plot_socio_demographics(df, fname):
 def plot_transport(df, fname):
     transport = df[groups_translated.get("Transport")]
     create_bar_plot(
-        transport, fname, title="Which CO2 transportation methods would you agree with?"
-    )
-
-
-def plot_distance(df, fname):
-    distance = df[groups_translated.get("Distance")]
-    create_bar_plot(
-        distance,
+        transport,
         fname,
-        title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+        title="Which CO2 transportation methods would you agree with?",
     )
+
+
+def plot_emotion(df, fname):
+    col = "What primary emotion do you feel towards DAC technologies?"
+    data = (
+        df[col]
+        .value_counts()
+        .reindex(["Happiness", "Enthusiasm", "Hope", "Worry", "Fear", "Anger"])
+    )
+    # remove index name so it is not plotted as caption
+    data.index.name = None
+    ax = data.plot(kind="bar", title=col)
+    # annotate
+    for p in ax.patches:
+        width, height = p.get_width(), p.get_height()
+        x, y = p.get_xy()
+        if height > 10:
+            ax.text(
+                x + width / 2,
+                y + height / 2,
+                "{:.0f}".format(height),
+                horizontalalignment="center",
+                verticalalignment="center",
+                fontsize=8,
+            )
+    fig = ax.get_figure()
+    fig.savefig(fname, transparent=True, bbox_inches="tight", dpi=dpi)
+    plt.close(fig)
+
+
+# def plot_distance(df, fname):
+#     distance = df[groups_translated.get("Distance")]
+#     create_bar_plot(
+#         distance,
+#         fname,
+#         title="If the following technologies were introduced in Germany,\n how large should the minimum distance to the nearest settlement be?",
+#     )
 
 
 if __name__ == "__main__":
@@ -247,5 +315,6 @@ if __name__ == "__main__":
     plot_climate_change(df, "figs/climate_change.png")
     plot_socio_demographics(df, "figs/socio_demographic.png")
     plot_tampering(df, "figs/tampering.png")
-    plot_transport(df, "figs/transport.png")
     plot_distance(df, "figs/distance.png")
+    plot_transport(df, "figs/transport.png")
+    plot_emotion(df, "figs/emotion.png")
