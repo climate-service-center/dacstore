@@ -46,4 +46,4 @@ jobs:
 
     - name: Run numerics
       run: |
-        python scripts/create-numerics-data.py
+        python scripts/create-numeric-data.py
