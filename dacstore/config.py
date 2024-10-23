@@ -78,6 +78,75 @@ groups = {
 }
 
 
+weighting_groups = {
+    "climate_change_perception": [
+        "Der Klimawandel findet tatsächlich statt.",
+        "Der Klimawandel ist ein ernstes Problem.",
+        "Menschliche Aktivitäten sind die Hauptursache des Klimawandels.",
+        "Wir alle sollten uns bemühen, unseren CO2-Ausstoß zu reduzieren.",
+    ],
+    "tampering": [
+        #     "DAC ist eine ausgereifte saubere Technologie.",
+        "Menschen sollten die Natur nicht auf diese Weise manipulieren.",
+        "Ich denke nicht, dass das Einbringen von CO2 in den Boden eine gute Idee ist.",
+        "Versuche, das Klimasystem durch die Anwendung von DAC zu beeinflussen, zeugen von menschlichem Hochmut.",
+    ],
+    # "transport": [
+    #     "LKW",
+    #     "Eisenbahn",
+    #     "Pipeline (Rohrleitungstransport)",
+    #     "Tanker (Schiff)",
+    #     "Mit keiner",
+    #     "Weiß nicht",
+    # ],
+    "risk": [
+        "DAC ist sicher.",
+        "CO2-Speicherung ist sicher.",
+        "CO2-Speicherung könnte Erdbeben verursachen.",
+        "CO2-Speicherung könnte Explosionen verursachen.",
+        "CO2-Speicherung könnte CO2-Leckagen verursachen.",
+    ],
+    "trust": [
+        "Politik",
+        "Industrie",
+        "Wissenschaft",
+        "Vereinte Nationen (UNO)",
+        "Europäische Union",
+        "Nichtregierungs- und Umweltschutzorganisationen",
+        "Medien",
+    ],
+    "emotion": [
+        "Welche Hauptemotion empfinden Sie gegenüber DAC-Technologien?",
+    ],
+    "distance": [
+        "DAC Anlage",
+        "CO2-Speicherung im Boden",
+        "CO2-Speicherung im Meeresboden",
+    ],
+    "socio_demographic": [
+        "Geschlecht",
+        "Altersgruppe",
+        # "Höchster Bildungsabschluss",
+        # "Beruf",
+    ],
+    "dac_awareness": [
+        "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
+    ],
+    "dac_knowledge": [
+        "Wie gut sind ihre Kenntnisse dieser Technologien?",
+    ],
+    "storage_awareness": [
+        "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?",
+    ],
+    "initial_storage_support": [
+        "CO2-Speicherung",
+    ],
+    "final_storage_support": [
+        "CO2-Speicherung.1",
+    ],
+}
+
+
 col_shorts = {
     "DAC Awareness": "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
     "DAC Knowledge": "Wie gut sind ihre Kenntnisse dieser Technologien?",
@@ -150,7 +219,8 @@ replacer = {
     "Neutral": 3,
     "Etwas": 4,
     "Voll und ganz": 5,
-    "Nein": 1,
+    "Nein": 0,
+    "Ja": 1,
     "Nur gehört / Keine Kenntnisse ": 2,
     "Nur gehört / Keine Kenntnisse": 2,
     "Grundverständnis": 3,
@@ -163,15 +233,16 @@ replacer = {
     "Stimme ich zu": 4,
     "Stimme voll und ganz zu": 5,
     "Weiß nicht": np.nan,
+    # "Weiß nicht": 0,
     "Männlich": 1,
     "Weiblich": 2,
     "Divers": 3,
-    "18-19": 1,
-    "20 - 29": 2,
-    "30 - 39": 3,
-    "40 - 49": 4,
-    "50 - 59": 5,
-    "60+": 6,
+    "18 - 19": 1.0,
+    "20 - 29": 2.0,
+    "30 - 39": 3.0,
+    "40 - 49": 4.0,
+    "50 - 59": 5.0,
+    "60+": 6.0,
     "(noch) kein Abschluss": 1,
     "Volks-/Hauptschule": 2,
     "Weiterführende Schule ohne Abitur": 3,
@@ -210,13 +281,14 @@ replacer = {
     "Sorge": 2,
     "Angst": 2,
     "Nirgendwo in Deutschland": 5,
+    # "Nirgendwo in Deutschland": 5,
     "100 km": 4,
     "10 km": 3,
     "1 km": 2,
     "500 m": 1,
     "Überhaupt kein Vertrauen": 1,
-    "Geringes Vertrauen ": 2,
-    "Mäßiges Vertrauen ": 4,
+    "Geringes Vertrauen": 2,
+    "Mäßiges Vertrauen": 4,
     "Starkes Vertrauen": 5,
 }
 
@@ -300,6 +372,7 @@ translation_answers = {
     "Neutral": "Neutral",
     "Etwas": "Somewhat",
     "Voll und ganz": "Absolutely",
+    "Ja": "Yes",
     "Nein": "No",
     "Nie gehört": "Never heard",
     "Nur gehört / Keine Kenntnisse": "I heard about / no knowledge",
@@ -400,7 +473,7 @@ trust_en = [
     "I dont know",
 ]
 
-support = [
+support_en = [
     "Not at all",
     "Rather not",
     "Neutral",
@@ -408,7 +481,7 @@ support = [
     "Absolutely",
 ]
 
-agreement = [
+agreement_en = [
     "Don’t agree at all",
     "Don’t agree",
     "Neutral",
@@ -432,8 +505,8 @@ categories = {
     "knowledge_de": knowledge_de,
     "knowledge_en": [translation_answers[de] for de in knowledge_de],
     "trust_en": trust_en,
-    "support_en": support,
-    "agreement_en": agreement,
+    "support_en": support_en,
+    "agreement_en": agreement_en,
     "gender_en": gender,
     "age": age,
     "distance_en": distance,
@@ -457,3 +530,35 @@ for k, v in groups.items():
         groups_translated[k] = [
             (translation_columns.get(col) or translation_answers.get(col)) for col in v
         ]
+
+
+# encoding = {
+#     'Climate change is really happening': categories["agreement_en"],
+#     'Climate change is a serious problem' : categories["agreement_en"] ,
+#     'Human activities are the main cause of climate change': categories["agreement_en"],
+#     'We should all make an effort to reduce or CO2 emissions': categories["agreement_en"],
+#     'Have you heard about Direct Air Capture (DAC) technologies?': ["No", "Yes"] ,
+#     'How would you rate your knowledge of DAC?': catergories["knowledge_en"],
+#     'Have you heard about CO2 storage?': ["No", "Yes"] ,
+#     'How would you rate your knowledge of CO2 Storage?': categories["knowledge_en"],
+#     'DAC is a mature clean technology': categories["agreement_en"],
+#     'Humans should not be tampering with nature in this way': categories["agreement_en"],
+#     'I don’t think that injecting CO2 into the ground is a good idea': categories["agreement_en"],
+#     'Trying to influence the climate system by using DAC reflects human arrogance': categories["agreement_en"],
+
+#     'Reducing CO2 emissions would be more cost efficient than using DAC': categories["agreement_en"],
+#     'Paying €100 to capture 1 ton of CO2 is a reasonable price': categories["agreement_en"],
+#     'DAC could help capture emissions from hard-to-abate sectors such as agriculture or cement production': categories["agreement_en"],
+#     #    'Including DAC as a part of an overall strategy can help Germany achieve its climate goals and limit climate change to 1.5°C',
+#     #    'DAC is a safe technology', 'CO2-Storage is a safe technology',
+#     #    'DAC is an efficient technology to fight climate change',
+#     #    'CO2-Storage could cause earthquakes',
+#     #    'CO2-Storage could cause explosions',
+#     #    'CO2-Storage could cause toxic leaks',
+# }
+
+
+encoding = {
+    (translation_answers.get(k) or f'no translation for "{k}"'): v
+    for k, v in replacer.items()
+}

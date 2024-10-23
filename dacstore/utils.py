@@ -196,3 +196,11 @@ def report_to_excel(df, filename):
     adjust_excel_column_width(df, writer.sheets[GENDER_AGE])
     # workbook.save(filename=filename)
     writer.close()
+
+
+def ensure_floats(df, groups):
+    """Ensure to convert grouped columns into floats"""
+    for k, v in groups.items():
+        for col in v:
+            df[col] = df[col].astype(float)
+    return df

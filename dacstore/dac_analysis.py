@@ -68,9 +68,8 @@ def get_df(filename, drop=True, translate=True):
     return df
 
 
-def valid_row(row):
-    pass
-
-
-def valids(df):
-    "add a colum with validation check"
+def compute_group_averages(df, groups):
+    """Compute group averages from different groups and columns"""
+    for k, v in groups.items():
+        df[k] = df[v].mean(axis=1)
+    return df
