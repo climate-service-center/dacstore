@@ -73,3 +73,11 @@ def compute_group_averages(df, groups):
     for k, v in groups.items():
         df[k] = df[v].mean(axis=1)
     return df
+
+
+def set_dependent_questions(df):
+    depends = {
+        "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?": "Wie gut sind ihre Kenntnisse dieser Technologien?",
+        "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?": "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?",
+    }
+    return depends

@@ -1,6 +1,3 @@
-import numpy as np
-
-
 groups = {
     "Climate Change": [
         "Der Klimawandel findet tatsächlich statt.",
@@ -123,17 +120,19 @@ weighting_groups = {
         "CO2-Speicherung im Boden",
         "CO2-Speicherung im Meeresboden",
     ],
-    "socio_demographic": [
-        "Geschlecht",
-        "Altersgruppe",
-        # "Höchster Bildungsabschluss",
-        # "Beruf",
-    ],
+    # "socio_demographic": [
+    #     "Geschlecht",
+    #     "Altersgruppe",
+    #     # "Höchster Bildungsabschluss",
+    #     # "Beruf",
+    # ],
     "dac_awareness": [
         "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
+        # "Direct Air Capture (DAC)",
     ],
     "dac_knowledge": [
         "Wie gut sind ihre Kenntnisse dieser Technologien?",
+        # "Direct Air Capture (DAC)",
     ],
     "storage_awareness": [
         "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?",
@@ -144,7 +143,24 @@ weighting_groups = {
     "final_storage_support": [
         "CO2-Speicherung.1",
     ],
+    "initial_dac_support": [
+        "Direct Air Capture (DAC)",
+    ],
+    "final_dac_support": [
+        "Direct Air Capture (DAC).1",
+    ],
+    "age": [
+        "Altersgruppe",
+    ],
+    "gender": [
+        "Geschlecht",
+    ],
 }
+
+
+analyze_cols = []
+for qs in weighting_groups.values():
+    analyze_cols += qs
 
 
 col_shorts = {
@@ -232,8 +248,8 @@ replacer = {
     "Stimme zu": 4,
     "Stimme ich zu": 4,
     "Stimme voll und ganz zu": 5,
-    "Weiß nicht": np.nan,
-    # "Weiß nicht": 0,
+    # "Weiß nicht": np.nan,
+    "Weiß nicht": 0,
     "Männlich": 1,
     "Weiblich": 2,
     "Divers": 3,
