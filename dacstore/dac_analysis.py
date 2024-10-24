@@ -4,7 +4,13 @@
 import pandas as pd
 
 
-from .config import drop_cols, cleaning_dict, translation_columns, translation_answers
+from .config import (
+    drop_cols,
+    cleaning_dict,
+    translation_columns,
+    translation_answers,
+    no_replacer,
+)
 
 
 def strip_df(df):
@@ -76,8 +82,35 @@ def compute_group_averages(df, groups):
 
 
 def set_dependent_questions(df):
+    print("setting dependent question values...")
     depends = {
         "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?": "Wie gut sind ihre Kenntnisse dieser Technologien?",
         "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?": "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?",
     }
-    return depends
+    # return depends
+    for k, v in depends.items():
+        df.loc[df[k] == "Nein", v] = no_replacer
+    return df
+
+
+def set_no_knowledge_to_neutral(df):
+    distance = [
+        "DAC Anlage",
+        "CO2-Speicherung im Boden",
+        "CO2-Speicherung im Meeresboden",
+    ]
+    dont_care = "Stimme weder zu noch lehne ich ab"
+    neutral = "Neutral"
+    dont_know = "Weiß nicht"
+    cols = [c for c in df.columns if dont_know in df[c].unique()]
+    for c in cols:
+        if c in distance:
+            # replace dont_know with "Nirgendwo in Deutschland"
+            df.loc[df[c] == dont_know, c] = "Nirgendwo in Deutschland"
+        elif dont_care in df[c].unique():
+            # replace dont_know with "Stimme weder zu noch lehne ich ab"
+            df.loc[df[c] == dont_know, c] = dont_care
+        elif neutral in df[c].unique():
+            # replace dont_know with "Neutral"
+            df.loc[df[c] == dont_know, c] = neutral
+    return df
