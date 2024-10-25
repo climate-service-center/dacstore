@@ -1,6 +1,5 @@
 import numpy as np
 
-
 groups = {
     "Climate Change": [
         "Der Klimawandel findet tatsächlich statt.",
@@ -91,6 +90,18 @@ weighting_groups = {
         "Ich denke nicht, dass das Einbringen von CO2 in den Boden eine gute Idee ist.",
         "Versuche, das Klimasystem durch die Anwendung von DAC zu beeinflussen, zeugen von menschlichem Hochmut.",
     ],
+    "maturity": [
+        "DAC ist eine ausgereifte saubere Technologie.",
+    ],
+    "benefit": [
+        "DAC könnte dazu beitragen, schwer vermeidbare Emissionen aus Sektoren wie Landwirtschaft oder Zementproduktion zu entnehmen.",
+        "Die Implementierung von DAC als Teil einer Gesamtstrategie kann Deutschland dabei helfen, seine Klimaziele zu erreichen und den Klimawandel auf 1,5 °C zu begrenzen.",
+        "DAC ist eine effiziente Technologie zur Bekämpfung des Klimawandels.",
+    ],
+    "cost": [
+        "Emissionen zu reduzieren wäre kosteneffizienter als DAC.",
+        "100 € für die Entnahme von 1 Tonne CO2 zu zahlen, ist ein angemessener Preis.",
+    ],
     # "transport": [
     #     "LKW",
     #     "Eisenbahn",
@@ -123,20 +134,25 @@ weighting_groups = {
         "CO2-Speicherung im Boden",
         "CO2-Speicherung im Meeresboden",
     ],
-    "socio_demographic": [
-        "Geschlecht",
-        "Altersgruppe",
-        # "Höchster Bildungsabschluss",
-        # "Beruf",
-    ],
+    # "socio_demographic": [
+    #     "Geschlecht",
+    #     "Altersgruppe",
+    #     # "Höchster Bildungsabschluss",
+    #     # "Beruf",
+    # ],
     "dac_awareness": [
         "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
+        # "Wie gut sind ihre Kenntnisse dieser Technologien?",
     ],
     "dac_knowledge": [
         "Wie gut sind ihre Kenntnisse dieser Technologien?",
+        # "Direct Air Capture (DAC)",
     ],
     "storage_awareness": [
         "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?",
+    ],
+    "storage_knowledge": [
+        "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?",
     ],
     "initial_storage_support": [
         "CO2-Speicherung",
@@ -144,7 +160,55 @@ weighting_groups = {
     "final_storage_support": [
         "CO2-Speicherung.1",
     ],
+    "initial_dac_support": [
+        "Direct Air Capture (DAC)",
+    ],
+    "final_dac_support": [
+        "Direct Air Capture (DAC).1",
+    ],
+    "age": [
+        "Altersgruppe",
+    ],
+    "gender": [
+        "Geschlecht",
+    ],
+    "education": [
+        "Höchster Bildungsabschluss",
+    ],
+    "occupation": [
+        "Beruf",
+    ],
+    "state": [
+        "Bundesland",
+    ],
+    "trust_in_science": [
+        "Wissenschaft",
+    ],
+    "trust_in_politics": [
+        "Politik",
+    ],
+    "trust_in_industry": [
+        "Industrie",
+    ],
+    "trust_in_un": [
+        "Vereinte Nationen (UNO)",
+    ],
+    "trust_in_eu": [
+        "Europäische Union",
+    ],
+    "trust_in_ngos": [
+        "Nichtregierungs- und Umweltschutzorganisationen",
+    ],
+    "trust_in_media": [
+        "Medien",
+    ],
 }
+
+
+analyze_cols = []
+for qs in weighting_groups.values():
+    analyze_cols += qs
+analyze_cols = list(dict.fromkeys(analyze_cols))
 
 
 col_shorts = {
@@ -212,6 +276,7 @@ rename_cols = {
     "Ihre E-Mail Adresse": "Engagement",
 }
 
+no_replacer = "Nie gehört"
 
 replacer = {
     "Überhaupt nicht": 1,
@@ -219,8 +284,9 @@ replacer = {
     "Neutral": 3,
     "Etwas": 4,
     "Voll und ganz": 5,
-    "Nein": 0,
-    "Ja": 1,
+    "Nein": 1,
+    "Ja": 2,
+    no_replacer: 1,
     "Nur gehört / Keine Kenntnisse ": 2,
     "Nur gehört / Keine Kenntnisse": 2,
     "Grundverständnis": 3,
@@ -274,12 +340,12 @@ replacer = {
     "Schleswig-Holstein": 15,
     "Thüringen": 16,
     "Ich lebe im Ausland": 17,
-    "Hoffnung": 1,
-    "Begeisterung": 1,
-    "Glück": 1,  # SHOULD WE LEAVE THIS BINARY OR IN 1 TO 6?
-    "Wut": 2,
-    "Sorge": 2,
-    "Angst": 2,
+    "Hoffnung": 2,
+    "Begeisterung": 2,
+    "Glück": 2,  # SHOULD WE LEAVE THIS BINARY OR IN 1 TO 6?
+    "Wut": 1,
+    "Sorge": 1,
+    "Angst": 1,
     "Nirgendwo in Deutschland": 5,
     # "Nirgendwo in Deutschland": 5,
     "100 km": 4,

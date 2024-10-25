@@ -15,7 +15,12 @@ def create_numeric_data(df):
 if __name__ == "__main__":
     # we work here with the original column names, no translation
     df = get_data(
-        source="./data/data.csv", drop=True, translate=False, drop_invalid=True
+        source="./data/data.csv",
+        drop=True,
+        translate=False,
+        drop_invalid=True,
+        no_knowledge_to_neutral=True,
+        set_dependent=True,
     )
     df_numeric = create_numeric_data(df)
     print("writing numeric data")

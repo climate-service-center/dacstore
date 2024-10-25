@@ -4,6 +4,7 @@ from io import StringIO
 
 from .config import drop_cols, cleaning_dict, translation_columns, translation_answers
 from .validation import gender_age, valid, attention_col
+from .dac_analysis import set_dependent_questions, set_no_knowledge_to_neutral
 
 survey_id1 = 1740754  # Direct Air Capture in Germany
 survey_id2 = 1837044  # Direct Air Capture in Germany - Bilendi
@@ -102,6 +103,8 @@ def get_data(
     survey_ids=None,
     validate=False,
     drop_invalid=False,
+    set_dependent=False,
+    no_knowledge_to_neutral=False,
 ):
     """read dataframe from file or surveyhero api"""
     if survey_ids is None:
@@ -122,6 +125,12 @@ def get_data(
     df = strip_df(df)
     df = strip_double_whitespaces(df)
     df = df.replace(cleaning_dict)
+
+    if set_dependent:
+        df = set_dependent_questions(df)
+
+    if no_knowledge_to_neutral:
+        df = set_no_knowledge_to_neutral(df)
 
     if validate is True:
         df["valid"] = valid(df)
