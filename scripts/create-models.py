@@ -2,6 +2,8 @@ from dacstore.utils import ensure_floats, get_data
 from dacstore.config import weighting_groups, replacer
 from dacstore.dac_analysis import compute_group_averages
 
+import statsmodels.api as sm
+
 
 cols = [
     "climate_change_perception",
@@ -43,6 +45,13 @@ def create_numeric_data(df):
     df = ensure_floats(df, weighting_groups)
     df = compute_group_averages(df, weighting_groups)
     return df
+
+
+def create_model(y, X):
+    """Create a model"""
+    X = sm.add_constant(X)
+    model = sm.OLS(y, X).fit()
+    return model
 
 
 if __name__ == "__main__":
