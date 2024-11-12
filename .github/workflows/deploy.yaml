@@ -27,6 +27,7 @@ jobs:
       - name: Install requirements
         run: |
           pip install -r requirements.txt
+          pip install -r docs/requirements.txt
       # Build the example book
       - name: Build book
         run: |
