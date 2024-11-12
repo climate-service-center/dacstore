@@ -126,16 +126,16 @@ def get_data(
     df = strip_double_whitespaces(df)
     df = df.replace(cleaning_dict)
 
-    if set_dependent:
+    if set_dependent is True:
         df = set_dependent_questions(df)
 
-    if no_knowledge_to_neutral:
+    if no_knowledge_to_neutral is True:
         df = set_no_knowledge_to_neutral(df)
 
     if validate is True:
         df["valid"] = valid(df)
 
-    if translate:
+    if translate is True:
         df = df.rename(columns=translation_columns)
         df = df.replace(translation_answers)
 
@@ -144,7 +144,7 @@ def get_data(
 
     df = strip_df(df)
 
-    if drop_invalid:
+    if drop_invalid is True:
         df = df[df.valid == "valid"]
 
     return df

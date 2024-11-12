@@ -140,17 +140,17 @@ weighting_groups = {
     #     # "Höchster Bildungsabschluss",
     #     # "Beruf",
     # ],
-    "dac_awareness": [
-        "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
-        # "Wie gut sind ihre Kenntnisse dieser Technologien?",
-    ],
+    # "dac_awareness": [
+    #    "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?",
+    # "Wie gut sind ihre Kenntnisse dieser Technologien?",
+    # ],
     "dac_knowledge": [
         "Wie gut sind ihre Kenntnisse dieser Technologien?",
         # "Direct Air Capture (DAC)",
     ],
-    "storage_awareness": [
-        "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?",
-    ],
+    # "storage_awareness": [
+    #    "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?",
+    # ],
     "storage_knowledge": [
         "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?",
     ],

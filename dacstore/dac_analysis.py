@@ -94,6 +94,7 @@ def set_dependent_questions(df):
 
 
 def set_no_knowledge_to_neutral(df):
+    """Set no knowledge answers to neutral answers"""
     distance = [
         "DAC Anlage",
         "CO2-Speicherung im Boden",
