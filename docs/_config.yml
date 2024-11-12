@@ -7,8 +7,8 @@
 # Book settings
 title                       : dacstore  # The title of the book. Will be placed in the left navbar.
 author                      : Lars Buntemeyer  # The author of the book
-copyright                   : "2024"  # Copyright year to be placed in the footer
-#logo                        : WCRP-CORDEX-logo.png  # A path to the book logo
+copyright                   : 2024  # Copyright year to be placed in the footer
+logo                        : DACStorE_Logo_RGB_digital_farbig.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

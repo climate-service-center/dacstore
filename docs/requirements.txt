@@ -1,0 +1,10 @@
+jupyter-book
+matplotlib
+pandas
+numpy
+requests
+jinja2
+openpyxl
+xlsxwriter
+seaborn
+statsmodels
