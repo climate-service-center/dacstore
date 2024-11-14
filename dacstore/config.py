@@ -84,16 +84,16 @@ weighting_groups = {
         "Menschliche Aktivitäten sind die Hauptursache des Klimawandels.",
         "Wir alle sollten uns bemühen, unseren CO2-Ausstoß zu reduzieren.",
     ],
-    "tampering": [
+    "tampering_with_nature": [
         #     "DAC ist eine ausgereifte saubere Technologie.",
         "Menschen sollten die Natur nicht auf diese Weise manipulieren.",
         "Ich denke nicht, dass das Einbringen von CO2 in den Boden eine gute Idee ist.",
         "Versuche, das Klimasystem durch die Anwendung von DAC zu beeinflussen, zeugen von menschlichem Hochmut.",
     ],
-    "maturity": [
+    "maturity_of_technology": [
         "DAC ist eine ausgereifte saubere Technologie.",
     ],
-    "benefit": [
+    "benefit_perception": [
         "DAC könnte dazu beitragen, schwer vermeidbare Emissionen aus Sektoren wie Landwirtschaft oder Zementproduktion zu entnehmen.",
         "Die Implementierung von DAC als Teil einer Gesamtstrategie kann Deutschland dabei helfen, seine Klimaziele zu erreichen und den Klimawandel auf 1,5 °C zu begrenzen.",
         "DAC ist eine effiziente Technologie zur Bekämpfung des Klimawandels.",
