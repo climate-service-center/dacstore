@@ -3,7 +3,9 @@
 
 # Acceptance analysis of Direct Air Capture and Storage
 
-Acceptance analysis of Direct Air Capture and Storage in the [DACStorE project](https://www.dacstore-project.com).
+*Acceptance analysis of Direct Air Capture and Storage in the [DACStorE project](https://www.dacstore-project.com).*
+
+This study investigates public perceptions and acceptance of Direct Air Capture (DAC) and CO2 storage technologies through a comprehensive survey. The survey, conducted among a diverse sample, assesses awareness, knowledge, and attitudes towards climate change, DAC, and CO2 storage. Key findings reveal that while a majority acknowledge the reality and seriousness of climate change, awareness and understanding of DAC technologies and CO2 storage remain limited. The analysis identifies significant factors influencing support for DAC and CO2 storage, including perceived risks, trust in institutions, and concerns about technological tampering with nature.
 
 ## Installation
 
