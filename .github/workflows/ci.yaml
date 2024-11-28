@@ -43,7 +43,3 @@ jobs:
     - name: Check plotting
       run: |
         python scripts/create-plots.py
-
-    - name: Run numerics
-      run: |
-        python scripts/create-numeric-data.py
