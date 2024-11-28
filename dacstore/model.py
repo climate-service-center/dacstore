@@ -4,7 +4,12 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 
 def multicollinearity(X):
-    """Check for multicollinearity"""
+    """Check for multicollinearity
+
+    Multicollinearity occurs when independent variables in a regression model are correlated.
+    This correlation is a problem because independent variables should be independent.
+
+    """
     # Check for multicollinearity using VIF
     X = sm.add_constant(X)  # Add a constant to the model (intercept)
     vif_data = pd.DataFrame()
@@ -18,6 +23,12 @@ def multicollinearity(X):
 
 
 def cronbach_alpha(df):
+    """Calculate Cronbach's alpha
+
+    Cronbach's alpha is a measure of internal consistency, that is,
+    how closely related a set of items are as a group.
+
+    """
     # Number of items (questions)
     N = df.shape[1]
     # Variance of each item

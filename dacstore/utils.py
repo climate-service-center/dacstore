@@ -105,6 +105,7 @@ def get_data(
     drop_invalid=False,
     set_dependent=False,
     no_knowledge_to_neutral=False,
+    invert_risk=True,
 ):
     """read dataframe from file or surveyhero api"""
     if survey_ids is None:

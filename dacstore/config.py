@@ -100,7 +100,7 @@ weighting_groups = {
     ],
     "cost": [
         "Emissionen zu reduzieren wäre kosteneffizienter als DAC.",
-        "100 € für die Entnahme von 1 Tonne CO2 zu zahlen, ist ein angemessener Preis.",
+        # "100 € für die Entnahme von 1 Tonne CO2 zu zahlen, ist ein angemessener Preis.",
     ],
     # "transport": [
     #     "LKW",
