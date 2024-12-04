@@ -23,3 +23,11 @@ pip install -r requirements.txt
 pip install -e .
 python main.py
 ```
+
+## Acknowledgments
+
+We acknowledge the use of GitHub Copilot, an AI-based code completion tool, which assisted in the development of the code used in this research.
+
+## References
+
+GitHub Copilot. GitHub, Inc. Available at: https://github.com/features/copilot
