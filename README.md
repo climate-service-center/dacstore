@@ -30,6 +30,6 @@ We acknowledge the use of GitHub Copilot, an AI-based code completion tool, whic
 
 ## References
 
-Josef Perktold, Skipper Seabold, Kevin Sheppard, ChadFulton, Kerby Shedden, jbrockmendel, j-grana6, Peter Quackenbush, Vincent Arel-Bundock, Wes McKinney, Ian Langmore, Bart Baker, Ralf Gommers, yogabonito, s-scherrer, Evgeny Zhurko, Matthew Brett, Enrico Giampieri, Yichuan Liu, … Yaroslav Halchenko. (2023). statsmodels/statsmodels: Release 0.14.0 (v0.14.0). Zenodo. https://doi.org/10.5281/zenodo.7899735
+Seabold, S., & Perktold, J. (2010). statsmodels: Econometric and statistical modeling with python. In 9th Python in Science Conference.
 
 GitHub Copilot. GitHub, Inc. Available at: https://github.com/features/copilot
