@@ -1,7 +1,8 @@
-
 <img src="https://www.dacstore-project.com/@@project-logo/DACStorE_Logo_RGB_digital_farbig.png" width="200" align="right">
 
 # Acceptance analysis of Direct Air Capture and Storage
+
+[![DOI](https://zenodo.org/badge/791768308.svg)](https://doi.org/10.5281/zenodo.15847678)
 
 *Acceptance analysis of Direct Air Capture and Storage in the [DACStorE project](https://www.dacstore-project.com).*
 
