@@ -4,7 +4,7 @@ import copy
 
 COMPLETION_TIME_LIMIT = pd.Timedelta(156, "sec")
 
-SCORE_LIMIT = 0.45
+SCORE_LIMIT = 0.45 # 45% of answers are the same (might be random answers) ====> TO DO: how was this value chosen? To explain in paper.
 
 NOT_COMPLETED = 1
 COMPLETION_TIME_TOO_LONG = 2
@@ -112,7 +112,9 @@ def create_row_status(status):
     return report
 
 
-def check_answers(row):
+def check_answers(row): # check for straightlining
+    """Check answers for straightlining"""
+
     score = 0
     for answer, questions in check_cols.items():
         # check if answer might be random

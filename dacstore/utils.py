@@ -99,16 +99,17 @@ def get_data(
     user=None,
     password=None,
     translate=False,
-    drop=True,
+    drop=True, # whether to drop unwanted columns in the final dataframe to be exported as data.csv
     survey_ids=None,
     validate=False,
-    drop_invalid=False,
+    drop_invalid=False, # ===> TO DO: implement logic to drop invalid entries based on validation results: 'valid' column. Elevate functionality of this parameter.
     set_dependent=False,
     no_knowledge_to_neutral=False,
-    invert_risk=True,
+    invert_risk=True
+    
 ):
     """read dataframe from file or surveyhero api"""
-    if survey_ids is None:
+    if survey_ids is None: # ====> TO DO: implement logic to handle multiple survey IDs, specifically only for Bilendi
         survey_ids = all_surveys
     if source is not None:
         # read from csv
@@ -146,12 +147,36 @@ def get_data(
     df = strip_df(df)
 
     if drop_invalid is True:
-        df = df[df.valid == "valid"]
+        df = df[df.valid == "valid"] # drop all invalid entries
+        
+    elif drop_invalid == 'no_speeding': # no_speeding = 'completion time too short'        
+        # check if df.valid column contains "completion time too short" or other text
+        mask = df['valid'].str.contains("completion time too short", na=False)
+        df = df[~mask]       
+        
+        df = df[df.valid != "survey was not completed"]        
+    
+    elif drop_invalid == 'no_straightlining': # no_straightlining = 'straightlining'
+        # check if df.valid column contains "straightlining" or other text
+        mask = df['valid'].str.contains("straightlining", na=False)
+        df = df[~mask]
+        
+        df = df[df.valid != "survey was not completed"]
+    
+    elif drop_invalid == 'no_attention': # no_attention = 'failed attention check'
+        # check if df.valid column contains 'failed attention check' or other text
+        mask = df['valid'].str.contains("failed attention check", na=False)
+        df = df[~mask]
+        
+        df = df[df.valid != "survey was not completed"] 
+    
+    elif drop_invalid == 'no_incomplete': # no_incomplete = 'survey was not completed'
+        df = df[df.valid != "survey was not completed"]        
 
     return df
 
-
-def adjust_excel_column_width(df, sheet):
+# Adjust the width of Excel columns based on the content
+def adjust_excel_column_width(df, sheet):    
     from openpyxl.utils import get_column_letter
 
     # Adjust the column widths based on the content
@@ -214,3 +239,24 @@ def ensure_floats(df, groups):
         for col in v:
             df[col] = df[col].astype(float)
     return df
+
+def post_filter(df, condition): # ====> TO DO: implement function to filter dataframe based on a condition
+    """Filter dataframe based on a condition"""
+    # example condition: '1: All entries'; '2: 'Speeding'; '3: 'Straightlining'; '4: 'Attention check failed'; '5: 'All invalid'
+    
+    if condition == '1: All entries':
+        return df
+    elif condition == '2: Speeding':
+        return df[df['completion_time'] < pd.Timedelta(156, "sec")]
+    elif condition == '3: Straightlining':
+        return df[df['valid'] == 'straightlining']
+    elif condition == '4: Attention check failed':
+        return df[df['valid'] == 'no attention']
+    elif condition == '5: All invalid':
+        return df[df['valid'] != 'valid']
+    else:
+        raise ValueError("Unknown condition")   
+    
+    print(f"Filtered dataframe to {len(df)} entries based on condition: {condition}")
+    return df
+    
