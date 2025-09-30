@@ -1,0 +1,40 @@
+                              OLS Regression Results                             
+=================================================================================
+Dep. Variable:     final_storage_support   R-squared:                       0.577
+Model:                               OLS   Adj. R-squared:                  0.572
+Method:                    Least Squares   F-statistic:                     115.1
+Date:                   Tue, 30 Sep 2025   Prob (F-statistic):          2.89e-238
+Time:                           16:18:24   Log-Likelihood:                -1441.1
+No. Observations:                   1364   AIC:                             2916.
+Df Residuals:                       1347   BIC:                             3005.
+Df Model:                             16                                         
+Covariance Type:               nonrobust                                         
+=============================================================================================
+                                coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------------
+const                         2.0898      0.280      7.451      0.000       1.540       2.640
+climate_change_perception     0.0849      0.026      3.288      0.001       0.034       0.135
+tampering_with_nature        -0.1963      0.030     -6.537      0.000      -0.255      -0.137
+maturity_of_technology        0.1176      0.031      3.771      0.000       0.056       0.179
+benefit_perception            0.4187      0.039     10.609      0.000       0.341       0.496
+cost                         -0.0558      0.025     -2.254      0.024      -0.104      -0.007
+risk                         -0.2682      0.045     -6.021      0.000      -0.356      -0.181
+trust                         0.1125      0.027      4.094      0.000       0.059       0.166
+emotion                       0.2274      0.050      4.524      0.000       0.129       0.326
+distance                     -0.0739      0.021     -3.482      0.001      -0.115      -0.032
+dac_knowledge                 0.0394      0.027      1.437      0.151      -0.014       0.093
+storage_knowledge             0.0831      0.025      3.289      0.001       0.034       0.133
+age                          -0.0422      0.015     -2.744      0.006      -0.072      -0.012
+gender                       -0.0124      0.042     -0.298      0.766      -0.094       0.069
+education                     0.0165      0.013      1.285      0.199      -0.009       0.042
+occupation                   -0.0103      0.013     -0.783      0.434      -0.036       0.016
+state                        -0.0030      0.004     -0.718      0.473      -0.011       0.005
+==============================================================================
+Omnibus:                       49.867   Durbin-Watson:                   2.058
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               74.363
+Skew:                          -0.337   Prob(JB):                     7.12e-17
+Kurtosis:                       3.925   Cond. No.                         222.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

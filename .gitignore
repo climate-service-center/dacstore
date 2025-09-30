@@ -103,3 +103,6 @@ ENV/
 
 # IDE settings
 .vscode/
+
+# results from experiments (Paper2)
+!/results/e1_no_incomplete
