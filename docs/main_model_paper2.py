@@ -26,3 +26,6 @@ print(f"Output folder: {output_folder}")
 # python model_paper2.py 'no_speeding' /e2
 # python model_paper2.py 'no_straightlining' /e3
 # python model_paper2.py 'no_attention' /e4
+
+# to run next time:
+# python model_paper2.py True e5
