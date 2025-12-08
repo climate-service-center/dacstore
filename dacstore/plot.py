@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 try:
     import seaborn  # noqa
 except ImportError:
@@ -18,6 +17,7 @@ def likert_plot(
     fname=None,
     dpi=300,
     title=None,
+    textwrap=45,
 ):
     """
     Parameters
@@ -34,6 +34,8 @@ def likert_plot(
     if figsize is None:
         figsize = (25, 5)
     labels = list(results.keys())
+    if textwrap:
+        labels = [textwrap.fill(label, textwrap) for label in labels]
     data = np.array(list(results.values()))
     data_cum = data.cumsum(axis=1)
     if colors is None:
