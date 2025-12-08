@@ -387,14 +387,14 @@ translation_columns = {
     "Der Klimawandel findet tatsächlich statt.": "Climate change is really happening",
     "Der Klimawandel ist ein ernstes Problem.": "Climate change is a serious problem",
     "Menschliche Aktivitäten sind die Hauptursache des Klimawandels.": "Human activities are the main cause of climate change",
-    "Wir alle sollten uns bemühen, unseren CO2-Ausstoß zu reduzieren.": "We should all make an effort to reduce or CO2 emissions",
+    "Wir alle sollten uns bemühen, unseren CO2-Ausstoß zu reduzieren.": "We should all make an effort to reduce our CO2 emissions",
     "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?": "Have you heard about Direct Air Capture and Storage (DACCS) technologies?",
-    "Wie gut sind ihre Kenntnisse dieser Technologien?": "How would you rate your knowledge of DACCS? ",
+    "Wie gut sind ihre Kenntnisse dieser Technologien?": "How would you rate your knowledge of DACCS?",
     "Haben Sie schon von Kohlendioxid (CO2)-Speicherung gehört?": "Have you heard about CO2 storage?",
     "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?": "How would you rate your knowledge of CO2 Storage?",
     "Direct Air Capture (DAC)": "Initial DACCS Support",
     "CO2-Speicherung": "Initial Storage Support",
-    "Welche Hauptemotion empfinden Sie gegenüber DAC-Technologien?": "What primary emotion do you feel towards DACCS technologies?",
+    "Welche Hauptemotion empfinden Sie gegenüber DAC-Technologien?": "What primary emotion do you feel regarding DACCS technologies?",
     "DAC ist eine ausgereifte saubere Technologie.": "DACCS is a mature clean technology",
     "Menschen sollten die Natur nicht auf diese Weise manipulieren.": "Humans should not be tampering with nature in this way",
     "Ich denke nicht, dass das Einbringen von CO2 in den Boden eine gute Idee ist.": "I don’t think that injecting CO2 into the ground is a good idea",
@@ -403,7 +403,7 @@ translation_columns = {
     "CO2-Speicherung im Boden": "CO2 storage underground",
     "CO2-Speicherung im Meeresboden": "CO2 storage in the seabed",
     "LKW": "Truck",
-    "Eisenbahn": "Railroad",
+    "Eisenbahn": "Railway",
     "Pipeline (Rohrleitungstransport)": "Pipelines",
     "Tanker (Schiff)": "Tanker",
     "Mit keiner": "With none",
@@ -414,16 +414,16 @@ translation_columns = {
     "Die Implementierung von DAC als Teil einer Gesamtstrategie kann Deutschland dabei helfen, seine Klimaziele zu erreichen und den Klimawandel auf 1,5 °C zu begrenzen.": "Including DACCS as a part of an overall strategy can help Germany achieve its climate goals and limit climate change to 1.5°C",
     "DAC ist eine effiziente Technologie zur Bekämpfung des Klimawandels.": "DACCS is an efficient technology to fight climate change",
     "DAC ist sicher.": "DACCS is a safe technology",
-    "CO2-Speicherung ist sicher.": "CO2-Storage is a safe technology",
-    "CO2-Speicherung könnte Erdbeben verursachen.": "CO2-Storage could cause earthquakes",
-    "CO2-Speicherung könnte Explosionen verursachen.": "CO2-Storage could cause explosions",
-    "CO2-Speicherung könnte CO2-Leckagen verursachen.": "CO2-Storage could cause toxic leaks",
+    "CO2-Speicherung ist sicher.": "CO2 storage is a safe technology",
+    "CO2-Speicherung könnte Erdbeben verursachen.": "CO2 storage could cause earthquakes",
+    "CO2-Speicherung könnte Explosionen verursachen.": "CO2 storage could cause explosions",
+    "CO2-Speicherung könnte CO2-Leckagen verursachen.": "CO2 storage could cause CO2 leaks",
     "Politik": "Politicians",
     "Industrie": "Industry",
     "Wissenschaft": "Science",
     "Vereinte Nationen (UNO)": "United Nations (UN)",
     "Europäische Union": "European Union",
-    "Nichtregierungs- und Umweltschutzorganisationen": "Environmental Protection Organizations and NGOs",
+    "Nichtregierungs- und Umweltschutzorganisationen": "NGOs and environmental organizations",
     "Medien": "Media",
     "Direct Air Capture (DAC).1": "Final DACCS Support",
     "CO2-Speicherung.1": "Final Storage Support",
@@ -467,7 +467,7 @@ translation_answers = {
     "Ausbildung": "Apprenticeship",
     "Abitur/(Fach-)Hochschulreife": "High school",
     "Bachelor (BSc.)": "Bachelor (BSc.)",
-    "Master (MSc.) oder Diplom": "Masters (MSc.)",
+    "Master (MSc.) oder Diplom": "Master’s (MSc.)",
     "Promotion (Dr.) oder Habilitation (Prof.)": "PhD or Professorship",
     "Studierende": "Student",
     "Angestellt": "Employee",
@@ -482,16 +482,16 @@ translation_answers = {
     "Bremen": "Bremen",
     "Hamburg": "Hamburg",
     "Hessen": "Hesse",
-    "Mecklenburg-Vorpommern": "Mecklenburg- Western Pomerania",
+    "Mecklenburg-Vorpommern": "Mecklenburg-Western Pomerania",
     "Niedersachsen": "Lower Saxony",
     "Nordrhein-Westfalen": "North Rhine-Westphalia",
     "Rheinland-Pfalz": "Rhineland-Palatinate",
     "Saarland": "Saarland",
     "Sachsen": "Saxony",
     "Sachsen-Anhalt": "Saxony-Anhalt",
-    "Schleswig-Holstein": "Sleswick-Holsatia",
+    "Schleswig-Holstein": "Schleswig-Holstein",
     "Thüringen": "Thuringia",
-    "Ich lebe im Ausland": "I leave abroad",
+    "Ich lebe im Ausland": "I live abroad",
     "Hoffnung": "Hope",
     "Begeisterung": "Enthusiasm",
     "Glück": "Happiness",
@@ -535,8 +535,8 @@ trust_en = [
     "Low trust",
     "Neutral",
     "Moderate trust",
-    "Strongly trust",
-    "I dont know",
+    "Strong trust",
+    "I don't know",
 ]
 
 support_en = [
@@ -553,19 +553,19 @@ agreement_en = [
     "Neutral",
     "Agree",
     "Totally agree",
-    "I dont know",
+    "I don't know",
 ]
 
-distance = ["Nowhere in Germany", "100 km", "10 km", "1 km", "500 m", "I dont know"]
+distance = ["Nowhere in Germany", "100 km", "10 km", "1 km", "500 m", "I don't know"]
 
 
 gender = [
     "Male",
-    "Diverse",
     "Female",
+    "Diverse",
 ]
 
-age = ["30 - 39", "20 - 29", "40 - 49", "50 - 59", "60+"]
+age = ["18 - 19", "20 - 29", "30 - 39", "40 - 49", "50 - 59", "60+"]
 
 categories = {
     "knowledge_de": knowledge_de,

@@ -530,7 +530,7 @@ def plot_transport(df, fname):
 
 
 def plot_emotion(df, fname):
-    col = "What primary emotion do you feel towards DACCS technologies?"
+    col = "What primary emotion do you feel regarding DACCS technologies?"
     data = (
         df[col]
         .value_counts()
