@@ -16,13 +16,13 @@ This project utilizes the [SurveyHero API](https://developer.surveyhero.com/api/
 git clone https://github.com/climate-service-center/dacstore.git
 ```
 
-To run the analyis go to the dacstore directory and run `main.py`, e.g.
+To install requirements and reproduce plots:
 
 ```bash
 cd dacstore
 pip install -r requirements.txt
 pip install -e .
-python main.py
+python scripts/create-likert-plots.py
 ```
 
 ## Acknowledgments
