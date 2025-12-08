@@ -186,13 +186,13 @@ def plot_knowledge(df, fname="figs/knowledge.png"):
     STORAGE_KNOWLEDGE_DE = (
         "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?"
     )
-    DAC_KNOWLEDGE_EN = "How would you rate your knowledge of DAC?"
+    DAC_KNOWLEDGE_EN = "How would you rate your knowledge of DACCS?"
     STORAGE_KNOWLEDGE_EN = "How would you rate your knowledge of CO2 Storage?"
 
     labels = {
         DAC_KNOWLEDGE_DE: "Wie gut sind ihre Kenntnisse von Technologien\n zur Entnahme von Kohlendioxid (CO2) aus der Luft?",
         STORAGE_KNOWLEDGE_DE: "Wie gut sind ihre Kenntnisse\n der CO2-Speicherungstechnologien?",
-        DAC_KNOWLEDGE_EN: "How would you rate your\n knowledge of DAC?",
+        DAC_KNOWLEDGE_EN: "How would you rate your\n knowledge of DACCS?",
         STORAGE_KNOWLEDGE_EN: "How would you rate your\n knowledge of CO2 Storage?",
     }
 
@@ -228,8 +228,8 @@ def plot_support(df, fname):
         Saves a PNG to `fname`.
     """
     acceptance = [
-        "Initial DAC Support",
-        "Final DAC Support",
+        "Initial DACCS Support",
+        "Final DACCS Support",
         "Initial Storage Support",
         "Final Storage Support",
     ]
@@ -386,7 +386,7 @@ def plot_maturity(df, fname):
     None
         Saves a PNG to `fname`.
     """
-    group = ["DAC is a mature clean technology"]
+    group = ["DACCS is a mature clean technology"]
     create_likert_plot(
         df,
         fname,
@@ -420,7 +420,7 @@ def plot_cost_price(df, fname):
         Saves a PNG to `fname`.
     """
     group = [
-        "Reducing CO2 emissions would be more cost efficient than using DAC",
+        "Reducing CO2 emissions would be more cost efficient than using DACCS",
         "Paying €100 to capture 1 ton of CO2 is a reasonable price",
     ]
     create_likert_plot(
@@ -457,9 +457,9 @@ def plot_effectiveness(df, fname):
         Saves a PNG to `fname`.
     """
     group = [
-        "DAC could help capture emissions from hard-to-abate sectors such as agriculture or cement production",
-        "Including DAC as a part of an overall strategy can help Germany achieve its climate goals and limit climate change to 1.5°C",
-        "DAC is an efficient technology to fight climate change",
+        "DACCS could help capture emissions from hard-to-abate sectors such as agriculture or cement production",
+        "Including DACCS as a part of an overall strategy can help Germany achieve its climate goals and limit climate change to 1.5°C",
+        "DACCS is an efficient technology to fight climate change",
     ]
     create_likert_plot(
         df,
@@ -530,7 +530,7 @@ def plot_transport(df, fname):
 
 
 def plot_emotion(df, fname):
-    col = "What primary emotion do you feel towards DAC technologies?"
+    col = "What primary emotion do you feel towards DACCS technologies?"
     data = (
         df[col]
         .value_counts()
