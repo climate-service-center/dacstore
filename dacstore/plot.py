@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import textwrap
 
 try:
     import seaborn  # noqa
@@ -11,13 +12,13 @@ def likert_plot(
     results,
     category_names,
     colors=None,
-    limit=5.0,
+    limit=3.0,
     height=None,
     figsize=None,
     fname=None,
     dpi=300,
     title=None,
-    textwrap=45,
+    textwrap_width=45,
 ):
     """
     Parameters
@@ -30,12 +31,12 @@ def likert_plot(
         The category labels.
     """
     if height is None:
-        height = 0.8
+        height = 0.6
     if figsize is None:
         figsize = (25, 5)
     labels = list(results.keys())
-    if textwrap:
-        labels = [textwrap.fill(label, textwrap) for label in labels]
+    if textwrap_width:
+        labels = [textwrap.fill(label, textwrap_width) for label in labels]
     data = np.array(list(results.values()))
     data_cum = data.cumsum(axis=1)
     if colors is None:
