@@ -186,13 +186,13 @@ def plot_knowledge(df, fname="figs/knowledge.png"):
     STORAGE_KNOWLEDGE_DE = (
         "Wie gut sind ihre Kenntnisse der CO2-Speicherungstechnologien?"
     )
-    DAC_KNOWLEDGE_EN = "How would you rate your knowledge of DACCS?"
+    DAC_KNOWLEDGE_EN = "How would you rate your knowledge of DAC?"
     STORAGE_KNOWLEDGE_EN = "How would you rate your knowledge of CO2 Storage?"
 
     labels = {
         DAC_KNOWLEDGE_DE: "Wie gut sind ihre Kenntnisse von Technologien\n zur Entnahme von Kohlendioxid (CO2) aus der Luft?",
         STORAGE_KNOWLEDGE_DE: "Wie gut sind ihre Kenntnisse\n der CO2-Speicherungstechnologien?",
-        DAC_KNOWLEDGE_EN: "How would you rate your\n knowledge of DACCS?",
+        DAC_KNOWLEDGE_EN: "How would you rate your\n knowledge of DAC?",
         STORAGE_KNOWLEDGE_EN: "How would you rate your\n knowledge of CO2 Storage?",
     }
 
@@ -228,8 +228,8 @@ def plot_support(df, fname):
         Saves a PNG to `fname`.
     """
     acceptance = [
-        "Initial DACCS Support",
-        "Final DACCS Support",
+        "Initial DAC Support",
+        "Final DAC Support",
         "Initial Storage Support",
         "Final Storage Support",
     ]
@@ -394,8 +394,8 @@ def plot_maturity(df, fname):
         scale="agreement_en",
         colors=agreement_cmap,
         dpi=dpi,
-        # height=0.8,
-        # figsize=(12, 6),
+        height=0.2,
+        figsize=(25, 2),
         # title="Perception of DAC technology maturity",
     )
 
