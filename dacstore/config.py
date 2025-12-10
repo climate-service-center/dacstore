@@ -506,7 +506,7 @@ translation_answers = {
     "Überhaupt kein Vertrauen": "No trust at all",
     "Geringes Vertrauen": "Low trust",
     "Mäßiges Vertrauen": "Moderate trust",
-    "Starkes Vertrauen": "Strongly trust",
+    "Starkes Vertrauen": "Strong trust",
 }
 
 
