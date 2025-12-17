@@ -16,14 +16,40 @@ from .config import (
 
 
 def strip_df(df):
-    """strip leading and trailing whitespaces from all columns and headers"""
+    """Strip leading/trailing whitespace from all string columns and headers.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Input DataFrame possibly containing string columns with extraneous spaces.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Cleaned DataFrame with stripped string values and column names.
+    """
     df = df.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
     df.columns = df.columns.str.strip()
     return df
 
 
 def add_completion_time(df):
-    """compute completion time"""
+    """Compute survey completion time from start and end timestamps.
+
+    Expects columns "Started on" and "Last updated on" with format
+    `%d.%m.%Y %H:%M:%S`. Adds a `completion_time` timedelta column and drops
+    the original timestamp columns.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Input survey DataFrame.
+
+    Returns
+    -------
+    pandas.DataFrame
+        DataFrame with `completion_time` and without the original timestamp columns.
+    """
     tformat = "%d.%m.%Y %H:%M:%S"
     df["completion_time"] = pd.to_datetime(
         df["Last updated on"], format=tformat, errors="coerce"
@@ -32,7 +58,20 @@ def add_completion_time(df):
 
 
 def value_counts(df, normalize=True):
-    """Count values in colums"""
+    """Count per-column value frequencies.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame whose columns will be tallied.
+    normalize : bool, optional
+        If True, return relative frequencies; else absolute counts. Default True.
+
+    Returns
+    -------
+    dict[str, dict]
+        Mapping column name -> value counts (or proportions).
+    """
     counts = {}
     for c in df:
         counts[c] = df[c].value_counts(normalize=normalize).to_dict()
@@ -40,19 +79,51 @@ def value_counts(df, normalize=True):
 
 
 def to_results(counts, categories=None, labels=None, fact=100):
+    """Convert counts to ordered Likert result rows.
+
+    Parameters
+    ----------
+    counts : dict
+        Mapping of question -> value frequency dict.
+    categories : list[str], optional
+        Ordered category labels to align values.
+    labels : dict[str, str], optional
+        Mapping of original question text to shorter display labels.
+    fact : float, optional
+        Scaling factor (e.g., 100 to convert proportions to percentages). Default 100.
+
+    Returns
+    -------
+    dict[str, list[float]]
+        Mapping display label -> ordered list of values per category.
+    """
     results = {}
     for question, data in counts.items():
         label = question
         if labels:
             label = labels.get(question) or question
         cats = categories or list(data.keys())
-        print(cats)
         results[label] = [data.get(k, 0.0) * 100 for k in cats]
     return results
 
 
 def get_df(filename, drop=True, translate=True):
-    """open csv file and do some cleaning"""
+    """Load CSV and apply standard cleaning, translation, and pruning.
+
+    Parameters
+    ----------
+    filename : str or pathlib.Path
+        Path to the CSV file.
+    drop : bool, optional
+        Whether to drop columns defined in `config.drop_cols`. Default True.
+    translate : bool, optional
+        Whether to translate headers and answer labels using `config` maps. Default True.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Cleaned and prepared survey DataFrame.
+    """
     df = pd.read_csv(
         filename,
         index_col=0,
@@ -77,13 +148,41 @@ def get_df(filename, drop=True, translate=True):
 
 
 def compute_group_averages(df, groups):
-    """Compute group averages from different groups and columns"""
+    """Compute row-wise averages for specified column groups.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Input survey DataFrame.
+    groups : dict[str, list[str]]
+        Mapping of new column name -> list of existing column names to average.
+
+    Returns
+    -------
+    pandas.DataFrame
+        DataFrame with new average columns added.
+    """
     for k, v in groups.items():
         df[k] = df[v].mean(axis=1)
     return df
 
 
 def set_dependent_questions(df):
+    """Impose dependency rules: set knowledge responses based on awareness.
+
+    If a respondent answered "No" to awareness questions, corresponding
+    knowledge items are set to a predefined "no knowledge" value (`no_replacer`).
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Survey DataFrame.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Updated DataFrame with dependent values set.
+    """
     print("setting dependent question values...")
     depends = {
         "Haben Sie schon von Technologien zur Entnahme von Kohlendioxid (CO2) aus der Luft (auf Englisch Direct Air Capture (DAC)) gehört?": "Wie gut sind ihre Kenntnisse dieser Technologien?",
@@ -96,7 +195,18 @@ def set_dependent_questions(df):
 
 
 def set_no_knowledge_to_neutral(df):
-    """Set no knowledge answers to neutral answers"""
+    """Map "Don't know" to context-appropriate neutral or distance choices.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Survey DataFrame possibly containing "Weiß nicht" responses.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Updated DataFrame with neutralized values.
+    """
     distance = [
         "DAC Anlage",
         "CO2-Speicherung im Boden",
@@ -120,11 +230,34 @@ def set_no_knowledge_to_neutral(df):
 
 
 def invert_agreement(df):
+    """Invert a 1–5 agreement scale to maintain consistent direction.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Numeric 1–5 Likert items to invert.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Inverted scale values.
+    """
     return df.apply(lambda x: 5 - (x - 1))
 
 
 def fix_risk_agreement(df):
-    """Fix risk agreement values to get a consistent risk scale"""
+    """Normalize risk-related items so higher values reflect greater risk.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Survey DataFrame containing risk items.
+
+    Returns
+    -------
+    pandas.DataFrame
+        DataFrame with selected risk items inverted.
+    """
     risk_fix = [
         "DAC ist sicher.",
         "CO2-Speicherung ist sicher.",
@@ -134,7 +267,18 @@ def fix_risk_agreement(df):
 
 
 def fix_cost_agreement(df):
-    """Fix cost agreement values to get a consistent risk scale"""
+    """Invert cost-related agreement items to align interpretation.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Survey DataFrame containing cost items.
+
+    Returns
+    -------
+    pandas.DataFrame
+        DataFrame with selected cost items inverted.
+    """
     cost_fix = [
         "100 € für die Entnahme von 1 Tonne CO2 zu zahlen, ist ein angemessener Preis.",
     ]
@@ -143,18 +287,38 @@ def fix_cost_agreement(df):
 
 
 def fix_agreement(df):
-    """Fix agreement values to get a consistent scale"""
+    """Apply normalization across agreement items for consistent scales.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        Survey DataFrame.
+
+    Returns
+    -------
+    pandas.DataFrame
+        DataFrame with harmonized agreement scales.
+    """
     df = fix_risk_agreement(df)
     # df = fix_cost_agreement(df)
     return df
 
 
 def multicollinearity(X):
-    """Check for multicollinearity
+    """Compute Variance Inflation Factors (VIF) to assess multicollinearity.
 
-    Multicollinearity occurs when independent variables in a regression model are correlated.
-    This correlation is a problem because independent variables should be independent.
+    Multicollinearity occurs when independent variables in a regression model
+    are correlated; high VIF values indicate potential issues.
 
+    Parameters
+    ----------
+    X : pandas.DataFrame
+        Predictor matrix (numeric). A constant column will be added internally.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Table with `feature` and corresponding `VIF` values.
     """
     # Check for multicollinearity using VIF
     X = sm.add_constant(X)  # Add a constant to the model (intercept)
@@ -167,11 +331,19 @@ def multicollinearity(X):
 
 
 def cronbach_alpha(df):
-    """Calculate Cronbach's alpha
+    """Calculate Cronbach's alpha for internal consistency.
 
-    Cronbach's alpha is a measure of internal consistency, that is,
-    how closely related a set of items are as a group.
+    Cronbach's alpha measures how closely related a set of items are as a group.
 
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        DataFrame of related items (rows=respondents, cols=items).
+
+    Returns
+    -------
+    float
+        Alpha in [-inf, 1]. Values near 1 indicate high internal consistency.
     """
     df = df.copy().dropna()
     # Number of items (questions)

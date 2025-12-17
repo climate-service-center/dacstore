@@ -42,4 +42,4 @@ jobs:
 
     - name: Check plotting
       run: |
-        python scripts/create-plots.py
+        python scripts/create-likert-plots.py
