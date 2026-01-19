@@ -1,7 +1,6 @@
 import pandas as pd
 import copy
 
-
 COMPLETION_TIME_LIMIT = pd.Timedelta(156, "sec")
 
 SCORE_LIMIT = 0.45

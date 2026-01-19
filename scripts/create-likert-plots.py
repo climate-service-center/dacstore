@@ -41,7 +41,6 @@ import matplotlib.pyplot as plt
 
 import seaborn as sns  # noqa
 
-
 sns.set_theme(style="darkgrid")
 
 dpi = 300
