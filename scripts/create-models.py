@@ -4,7 +4,6 @@ from dacstore.dac_analysis import compute_group_averages
 
 import statsmodels.api as sm
 
-
 cols = [
     "climate_change_perception",
     "tampering",
