@@ -1,10 +1,11 @@
-import pandas as pd
-import requests
 from io import StringIO
 
-from .config import drop_cols, cleaning_dict, translation_columns, translation_answers
-from .validation import gender_age, valid, attention_col
+import pandas as pd
+import requests
+
+from .config import cleaning_dict, drop_cols, translation_answers, translation_columns
 from .dac_analysis import set_dependent_questions, set_no_knowledge_to_neutral
+from .validation import attention_col, gender_age, valid
 
 survey_id1 = 1740754  # Direct Air Capture in Germany
 survey_id2 = 1837044  # Direct Air Capture in Germany - Bilendi

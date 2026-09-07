@@ -5,13 +5,12 @@ import pandas as pd
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-
 from .config import (
-    drop_cols,
     cleaning_dict,
-    translation_columns,
-    translation_answers,
+    drop_cols,
     no_replacer,
+    translation_answers,
+    translation_columns,
 )
 
 
