@@ -1,5 +1,6 @@
-import pandas as pd
 import copy
+
+import pandas as pd
 
 COMPLETION_TIME_LIMIT = pd.Timedelta(156, "sec")
 
