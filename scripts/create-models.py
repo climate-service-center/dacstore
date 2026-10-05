@@ -1,8 +1,8 @@
-from dacstore.utils import ensure_floats, get_data
-from dacstore.config import weighting_groups, replacer
-from dacstore.dac_analysis import compute_group_averages
-
 import statsmodels.api as sm
+
+from dacstore.config import replacer, weighting_groups
+from dacstore.dac_analysis import compute_group_averages
+from dacstore.utils import ensure_floats, get_data
 
 cols = [
     "climate_change_perception",
