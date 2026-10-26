@@ -31,15 +31,13 @@ Notes
     `dacstore.dac_analysis.to_results` and related utilities.
 """
 
-from dacstore.config import agreement_cmap, categories, colors
-from dacstore.dac_analysis import to_results, value_counts
-from dacstore.utils import get_data
-from dacstore.plot import likert_plot
-from dacstore.config import groups_translated
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-
-import seaborn as sns  # noqa
+from dacstore.config import agreement_cmap, categories, colors, groups_translated
+from dacstore.dac_analysis import to_results, value_counts
+from dacstore.plot import likert_plot
+from dacstore.utils import get_data
 
 sns.set_theme(style="darkgrid")
 
@@ -142,7 +140,7 @@ def create_bar_plot(df, fname, title=None, min_count=10, dpi=300):
             ax.text(
                 x + width / 2,
                 y + height / 2,
-                "{:.0f}".format(height),
+                f"{height:.0f}",
                 horizontalalignment="center",
                 verticalalignment="center",
                 fontsize=8,
@@ -500,7 +498,7 @@ def plot_socio_demographics(df, fname):
             ax.text(
                 x + width / 2,
                 y + height / 2,
-                "{:.0f}".format(height),
+                f"{height:.0f}",
                 horizontalalignment="center",
                 verticalalignment="center",
                 fontsize=8,
@@ -546,7 +544,7 @@ def plot_emotion(df, fname):
             ax.text(
                 x + width / 2,
                 y + height / 2,
-                "{:.0f}".format(height),
+                f"{height:.0f}",
                 horizontalalignment="center",
                 verticalalignment="center",
                 fontsize=8,
