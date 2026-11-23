@@ -1,6 +1,7 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import textwrap
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 try:
     import seaborn  # noqa
@@ -76,7 +77,7 @@ def likert_plot(
                 ax.text(
                     x,
                     y,
-                    "{:3.2f} %".format(c),
+                    f"{c:3.2f} %",
                     ha="center",
                     va="center",
                     color=text_color,
